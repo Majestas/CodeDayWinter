@@ -1,7 +1,7 @@
 
 public class Puzzle {
 	//Variables for puzzle
-	private int[][] puzzleGrid = new int[][]{
+	private static int[][] puzzleGrid = new int[][]{
 			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -10,25 +10,25 @@ public class Puzzle {
 			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 			};
-	private int healthAdded = 0;
-	private int defenseAdded = 0;
-	private int attackAdded = 0;
-	private int speedAdded = 0;
-	private int moves = 0;
-	private int maxMoves = 0;
-	private int boxX = 0;
-	private int boxY = 0;
+	private static int healthAdded = 0;
+	private static int defenseAdded = 0;
+	private static int attackAdded = 0;
+	private static int speedAdded = 0;
+	private static int moves = 0;
+	private static int maxMoves = 0;
+	private static int boxX = 0;
+	private static int boxY = 0;
 	
 	//Stats variables
-	private int tilesCleared = 0;
-	private int matchesMade = 0;
-	private int redCleared = 0;
-	private int yellowCleared = 0;
-	private int greenCleared = 0;
-	private int blueCleared = 0;
+	private static int tilesCleared = 0;
+	private static int matchesMade = 0;
+	private static int redCleared = 0;
+	private static int yellowCleared = 0;
+	private static int greenCleared = 0;
+	private static int blueCleared = 0;
 	
 	//Puzzle methods
-	private void checkMatches() {
+	private static void checkMatches() {
 		boolean deletedTiles = false;
 		for(int i=0; i<7; i++) {
 			for(int j=0; j<5; j++) {
@@ -303,14 +303,16 @@ public class Puzzle {
 			dropTiles();
 		}
 	}
-	private void createGrid() {
+	public static void createGrid() {
 		for(int i=0;i<7;i++) {
 			for(int j=0;j<10;j++) {
 				puzzleGrid[i][j] = (int)(Math.random()*4)+1;
 			}
 		}
+		checkMatches();
 	}
-	private void dropTiles() {
+	
+	private static void dropTiles() {
 		boolean zeros = true;
 		do {
 			for(int i=6;i>0;i--) {
@@ -338,7 +340,7 @@ public class Puzzle {
 		} while(zeros);
 		checkMoves();
 	}
-	public void RunPuzzle(int move) {
+	public static void runPuzzle(int move) {
 		moves = 0;
 		maxMoves = move;
 		createGrid();
@@ -404,9 +406,9 @@ public class Puzzle {
 		}
 		Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
 	}
-	public void checkMoves() {
+	public static void checkMoves() {
 		if (moves == maxMoves) {
-			Display.setMode();
+			//Display.setMode();
 		}
 	}
 }

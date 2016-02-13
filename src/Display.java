@@ -60,6 +60,7 @@ public class Display {
 		initGamePanel();
 		initPuzzleScreen();
 		//updatePuzzleScreen();
+		Puzzle.runPuzzle(10);
 		
 
 	}
@@ -124,6 +125,20 @@ public class Display {
 			  
 		  });
 		  GameMenu.add(pauseOption);
+		  
+		  JMenuItem regenerateOption = new JMenuItem("Retest");
+		  regenerateOption.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				Puzzle.createGrid();
+			}
+			  
+		  });
+		  GameMenu.add(regenerateOption);
+		  
+		  
  
 		  mainFrame.setJMenuBar(menuBar);
 		  mainFrame.setVisible(true);
@@ -254,7 +269,7 @@ public class Display {
 		
 		puzzlePanel.removeAll();
 		
-		for (int k = 0; k < 70; k++){
+		for (int k = 0; k < gearArray.size(); k++){
 			switch (gearArray.get(k)){
 			
 			case 0:{
@@ -298,8 +313,8 @@ public class Display {
 	public static ArrayList<Integer> interpret2dArray(int [][] puzzleGrid){
 		ArrayList<Integer> tempArray = new ArrayList<Integer>();
 		
-		for (int i = 0; i < puzzleGrid.length - 1; i ++){
-			for (int k = 0; k < puzzleGrid[i].length - 1; k++){
+		for (int i = 0; i < puzzleGrid.length; i ++){
+			for (int k = 0; k < puzzleGrid[i].length ; k++){
 				tempArray.add(puzzleGrid[i][k]);
 			}
 		}
@@ -310,7 +325,7 @@ public class Display {
 	
 	
 	
-	
+
 	
 	public static JLabel createImageLabel(String filePath, int width, int height){
 		
