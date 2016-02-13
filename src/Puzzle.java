@@ -2,12 +2,13 @@
 public class Puzzle {
 	//Variables for puzzle
 	private int[][] puzzleGrid = new int[][]{
-			  { 0, 0, 0, 0, 0, 0},
-			  { 0, 0, 0, 0, 0, 0},
-			  { 0, 0, 0, 0, 0, 0},
-			  { 0, 0, 0, 0, 0, 0},
-			  { 0, 0, 0, 0, 0, 0},
-			  { 0, 0, 0, 0, 0, 0}
+			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 			};
 	private int healthAdded = 0;
 	private int defenseAdded = 0;
@@ -29,8 +30,78 @@ public class Puzzle {
 	//Puzzle methods
 	private void checkMatches() {
 		boolean deletedTiles = false;
-		for(int i=0; i<6; i++) {
-			for(int j=0; j<2; j++) {
+		for(int i=0; i<7; i++) {
+			for(int j=0; j<5; j++) {
+				if((puzzleGrid[i][j] == puzzleGrid[i][j+1]) && (puzzleGrid[i][j] == puzzleGrid[i][j+2]) && (puzzleGrid[i][j] == puzzleGrid[i][j+3]) && (puzzleGrid[i][j] == puzzleGrid[i][j+4]) && (puzzleGrid[i][j] == puzzleGrid[i][j+5])) {
+					switch (puzzleGrid[i][j]) {
+						case 1:
+							healthAdded+=6;
+							redCleared+=6;
+							break;
+						case 2:
+							defenseAdded+=6;
+							greenCleared+=6;
+							break;
+						case 3:
+							attackAdded+=6;
+							yellowCleared+=6;
+							break;
+						case 4:
+							speedAdded+=6;
+							blueCleared+=6;
+							break;
+						default:
+							break;
+					}
+				puzzleGrid[i][j] = 0;
+				puzzleGrid[i][j+1] = 0;
+				puzzleGrid[i][j+2] = 0;
+				puzzleGrid[i][j+3] = 0;
+				puzzleGrid[i][j+4] = 0;
+				puzzleGrid[i][j+5] = 0;
+				matchesMade++;
+				tilesCleared+=6;
+				deletedTiles = true;
+				}
+			}
+		}
+		for(int i=0;i<2;i++) {
+			for(int j=0;j<10;j++) {
+				if((puzzleGrid[i][j] == puzzleGrid[i+1][j]) && (puzzleGrid[i][j] == puzzleGrid[i+2][j]) && (puzzleGrid[i][j] == puzzleGrid[i+3][j]) && (puzzleGrid[i][j] == puzzleGrid[i+4][j]) && (puzzleGrid[i][j] == puzzleGrid[i+5][j])) {
+					switch (puzzleGrid[i][j]) {
+					case 1:
+						healthAdded+=6;
+						redCleared+=6;
+						break;
+					case 2:
+						defenseAdded+=6;
+						greenCleared+=6;
+						break;
+					case 3:
+						attackAdded+=6;
+						yellowCleared+=6;
+						break;
+					case 4:
+						speedAdded+=6;
+						blueCleared+=6;
+						break;
+					default:
+						break;
+					}
+					puzzleGrid[i][j] = 0;
+					puzzleGrid[i+1][j] = 0;
+					puzzleGrid[i+2][j] = 0;
+					puzzleGrid[i+3][j] = 0;
+					puzzleGrid[i+4][j] = 0;
+					puzzleGrid[i+5][j] = 0;
+					matchesMade++;
+					tilesCleared+=6;
+					deletedTiles = true;
+				}
+			}
+		}
+		for(int i=0; i<7; i++) {
+			for(int j=0; j<6; j++) {
 				if((puzzleGrid[i][j] == puzzleGrid[i][j+1]) && (puzzleGrid[i][j] == puzzleGrid[i][j+2]) && (puzzleGrid[i][j] == puzzleGrid[i][j+3]) && (puzzleGrid[i][j] == puzzleGrid[i][j+4])) {
 					switch (puzzleGrid[i][j]) {
 						case 1:
@@ -39,11 +110,11 @@ public class Puzzle {
 							break;
 						case 2:
 							defenseAdded+=5;
-							yellowCleared+=5;
+							greenCleared+=5;
 							break;
 						case 3:
 							attackAdded+=5;
-							greenCleared+=5;
+							yellowCleared+=5;
 							break;
 						case 4:
 							speedAdded+=5;
@@ -63,8 +134,8 @@ public class Puzzle {
 				}
 			}
 		}
-		for(int i=0;i<2;i++) {
-			for(int j=0;j<6;j++) {
+		for(int i=0;i<3;i++) {
+			for(int j=0;j<10;j++) {
 				if((puzzleGrid[i][j] == puzzleGrid[i+1][j]) && (puzzleGrid[i][j] == puzzleGrid[i+2][j]) && (puzzleGrid[i][j] == puzzleGrid[i+3][j]) && (puzzleGrid[i][j] == puzzleGrid[i+4][j])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
@@ -73,11 +144,11 @@ public class Puzzle {
 						break;
 					case 2:
 						defenseAdded+=5;
-						yellowCleared+=5;
+						greenCleared+=5;
 						break;
 					case 3:
 						attackAdded+=5;
-						greenCleared+=5;
+						yellowCleared+=5;
 						break;
 					case 4:
 						speedAdded+=5;
@@ -97,8 +168,8 @@ public class Puzzle {
 				}
 			}
 		}
-		for(int i=0; i<6; i++) {
-			for(int j=0; j<3; j++) {
+		for(int i=0; i<7; i++) {
+			for(int j=0; j<7; j++) {
 				if((puzzleGrid[i][j] == puzzleGrid[i][j+1]) && (puzzleGrid[i][j] == puzzleGrid[i][j+2]) && (puzzleGrid[i][j] == puzzleGrid[i][j+3])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
@@ -107,11 +178,11 @@ public class Puzzle {
 						break;
 					case 2:
 						defenseAdded+=4;
-						yellowCleared+=4;
+						greenCleared+=4;
 						break;
 					case 3:
 						attackAdded+=4;
-						greenCleared+=4;
+						yellowCleared+=4;
 						break;
 					case 4:
 						speedAdded+=4;
@@ -130,8 +201,8 @@ public class Puzzle {
 				}
 			}
 		}
-		for(int i=0;i<3;i++) {
-			for(int j=0;j<6;j++) {
+		for(int i=0;i<4;i++) {
+			for(int j=0;j<10;j++) {
 				if((puzzleGrid[i][j] == puzzleGrid[i+1][j]) && (puzzleGrid[i][j] == puzzleGrid[i+2][j]) && (puzzleGrid[i][j] == puzzleGrid[i+3][j])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
@@ -140,11 +211,11 @@ public class Puzzle {
 						break;
 					case 2:
 						defenseAdded+=4;
-						yellowCleared+=4;
+						greenCleared+=4;
 						break;
 					case 3:
 						attackAdded+=4;
-						greenCleared+=4;
+						yellowCleared+=4;
 						break;
 					case 4:
 						speedAdded+=4;
@@ -163,8 +234,8 @@ public class Puzzle {
 				}
 			}
 		}
-		for(int i=0; i<6; i++) {
-			for(int j=0; j<4; j++) {
+		for(int i=0; i<7; i++) {
+			for(int j=0; j<8; j++) {
 				if((puzzleGrid[i][j] == puzzleGrid[i][j+1]) && (puzzleGrid[i][j] == puzzleGrid[i][j+2])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
@@ -173,11 +244,11 @@ public class Puzzle {
 						break;
 					case 2:
 						defenseAdded+=3;
-						yellowCleared+=3;
+						greenCleared+=3;
 						break;
 					case 3:
 						attackAdded+=3;
-						greenCleared+=3;
+						yellowCleared+=3;
 						break;
 					case 4:
 						speedAdded+=3;
@@ -195,8 +266,8 @@ public class Puzzle {
 				}
 			}
 		}
-		for(int i=0;i<4;i++) {
-			for(int j=0;j<6;j++) {
+		for(int i=0;i<5;i++) {
+			for(int j=0;j<10;j++) {
 				if((puzzleGrid[i][j] == puzzleGrid[i+1][j]) && (puzzleGrid[i][j] == puzzleGrid[i+2][j])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
@@ -205,11 +276,11 @@ public class Puzzle {
 						break;
 					case 2:
 						defenseAdded+=3;
-						yellowCleared+=3;
+						greenCleared+=3;
 						break;
 					case 3:
 						attackAdded+=3;
-						greenCleared+=3;
+						yellowCleared+=3;
 						break;
 					case 4:
 						speedAdded+=3;
@@ -228,12 +299,13 @@ public class Puzzle {
 			}
 		}
 		if(deletedTiles) {
+			Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
 			dropTiles();
 		}
 	}
 	private void createGrid() {
-		for(int i=0;i<6;i++) {
-			for(int j=0;j<6;j++) {
+		for(int i=0;i<7;i++) {
+			for(int j=0;j<10;j++) {
 				puzzleGrid[i][j] = (int)(Math.random()*4)+1;
 			}
 		}
@@ -241,33 +313,100 @@ public class Puzzle {
 	private void dropTiles() {
 		boolean zeros = true;
 		do {
-			for(int i=5;i>0;i--) {
-				for(int j=0;j<6;j++) {
+			for(int i=6;i>0;i--) {
+				for(int j=0;j<10;j++) {
 					if(puzzleGrid[i][j]==0) {
 						puzzleGrid[i][j] = puzzleGrid[i-1][j];
 						puzzleGrid[i-1][j] = 0;
 					}
 				}
 			}
-			for(int j=0;j<6;j++) {
+			for(int j=0;j<10;j++) {
 				if(puzzleGrid[0][j] == 0) {
 					puzzleGrid[0][j] = (int)(Math.random()*4)+1;
 				}
 			}
 			zeros = false;
-			for(int i =0; i<6;i++) {
-				for(int j=0;j<6;j++) {
+			for(int i =0; i<7;i++) {
+				for(int j=0;j<10;j++) {
 					if(puzzleGrid[i][j]==0) {
 						zeros = true;
 					}
 				}
 			}
+			Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
 		} while(zeros);
+		checkMoves();
 	}
 	public void RunPuzzle(int move) {
 		moves = 0;
 		maxMoves = move;
 		createGrid();
+		Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
 	}
-	
+	public void rotate(int direction) {
+		int temp;
+		switch (direction) {
+		case 1: //Rotate Right
+			temp = puzzleGrid[boxY][boxX];
+			puzzleGrid[boxY][boxX] = puzzleGrid[boxY+1][boxX];
+			puzzleGrid[boxY+1][boxX] = puzzleGrid[boxY+1][boxX+1];
+			puzzleGrid[boxY+1][boxX+1] = puzzleGrid[boxY][boxX+1];
+			puzzleGrid[boxY][boxX+1] = temp;
+			break;
+		case 2: //Rotate Left
+			temp = puzzleGrid[boxY][boxX];
+			puzzleGrid[boxY][boxX] = puzzleGrid[boxY][boxX+1];
+			puzzleGrid[boxY][boxX+1] = puzzleGrid[boxY+1][boxX+1];
+			puzzleGrid[boxY+1][boxX+1] = puzzleGrid[boxY+1][boxX];
+			puzzleGrid[boxY+1][boxX] = temp;
+		case 3: //Flip Vertically
+			temp = puzzleGrid[boxY][boxX];
+			puzzleGrid[boxY][boxX] = puzzleGrid[boxY+1][boxX];
+			puzzleGrid[boxY+1][boxX] = temp;
+			temp = puzzleGrid[boxY][boxX+1];
+			puzzleGrid[boxY][boxX+1] = puzzleGrid[boxY+1][boxX+1];
+			puzzleGrid[boxY+1][boxX+1] = temp;
+		case 4: //Flip Horizontally
+			temp = puzzleGrid[boxY][boxX];
+			puzzleGrid[boxY][boxX] =  puzzleGrid[boxY][boxX+1];
+			puzzleGrid[boxY][boxX+1] = temp;
+			temp = puzzleGrid[boxY+1][boxX];
+			puzzleGrid[boxY+1][boxX] = puzzleGrid[boxY+1][boxX+1];
+			puzzleGrid[boxY+1][boxX+1] = temp;
+		}
+		Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
+		moves++;
+		checkMatches();
+	}
+	public void moveBox(int direction) {
+		switch (direction) {
+		case 1: // right
+			if (boxX<8) {
+				boxX++;
+			}
+			break;
+		case 2: //Left
+			if(boxX>0) {
+				boxX--;
+			}
+			break;
+		case 3: //Up
+			if(boxY>0) {
+				boxY--;
+			}
+			break;
+		case 4: //Down
+			if(boxY<6) {
+				boxY++;
+			}
+			break;
+		}
+		Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
+	}
+	public void checkMoves() {
+		if (moves == maxMoves) {
+			Display.setMode();
+		}
+	}
 }
