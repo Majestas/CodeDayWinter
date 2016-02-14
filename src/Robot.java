@@ -32,6 +32,232 @@ public class Robot
 		Robot.setY(startx);
 	}
 	
+
+	public static int getX() {
+		return Robot.x;
+	}
+
+	public static void setX(int x) {
+		Robot.x = x;
+	}
+
+	public static int getY() {
+		return Robot.y;
+	}
+
+	public static void setY(int y) {
+		Robot.y = y;
+	}
+
+	public static int getSpeedX() {
+		return speedX;
+	}
+
+	public static void setSpeedX(int speedX) {
+		
+		if(Robot.onGround())
+		{
+			Robot.speedX = speedX;
+		}
+		else
+			Robot.speedX = (speedX + Robot.speedX) / 2; //slower turns in air
+		
+		if(Robot.speedX > Robot.maxSpeed)
+		{
+			Robot.speedX = Robot.maxSpeed;
+		}
+		if(Robot.speedX < (-1)*Robot.maxSpeed)
+		{
+			Robot.speedX = (-1)*Robot.maxSpeed;
+		}
+	}
+
+	public static int getSpeedY() {
+		return speedY;
+	}
+
+	public static void setSpeedY(int speedY) 
+	{
+		if(Robot.onGround())
+		{
+			Robot.speedY = speedY;
+			if(Robot.speedY > Robot.maxSpeed)
+			{
+				Robot.speedY = Robot.maxSpeed;
+			}
+		}
+	}
+	
+	public static void updateLoc()
+	{
+		if(!Robot.collideX())
+		{
+			Robot.x += Robot.speedX;
+		}
+		if(!Robot.collideY())
+		{
+			Robot.y += Robot.speedY;
+		}
+			
+	}
+	
+	public static boolean collideX()
+	{
+		boolean response = true;
+		
+		int ximage = Robot.x + Robot.speedX;
+		int yimage = Robot.y + 0;
+		
+		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
+		
+		int minspeed;
+		if(Robot.speedX > 0)
+			minspeed = 999999; //will be lowered
+		else
+			minspeed = -999999;
+		int diff;
+		
+		for(int[] plat : plats)
+		{
+			if(ximage > plat[0] && ximage < plat[0] + plat[2])
+			{
+				response = false;
+				break;
+			}
+			if(ximage > plat[0] && ximage + Robot.width < plat[0] + plat[2])
+			{
+				response = false;
+				break;
+			}
+			
+			if(response == false)
+			{
+				response = true;
+				
+				if(Robot.x > 0)
+				{
+					diff = plat[0] - (Robot.x + Robot.width);
+					if(diff < minspeed)
+						minspeed = diff;
+				}
+				else
+				{
+					diff = Robot.x - (plat[0] + plat[2]);
+					if(diff > minspeed)
+						minspeed = diff;
+				}
+				
+				if(yimage > plat[1] && yimage < plat[1] + plat[3])
+				{
+					response = false;
+					break;
+				}
+				if(ximage > plat[1] && ximage + Robot.height < plat[1] + plat[3])
+				{
+					response = false;
+					break;
+				}
+			}
+		}
+		
+		
+		return response;
+	}
+	
+	public static boolean collideY()
+	{
+		boolean response = true;
+		
+		int ximage = Robot.x + 0;
+		int yimage = Robot.y + Robot.speedY;
+		
+		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
+		
+		int minspeed;
+		if(Robot.speedY > 0)
+			minspeed = 999999; //will be lowered
+		else
+			minspeed = -999999;
+		int diff;
+		
+		for(int[] plat : plats)
+		{
+			if(yimage > plat[1] && yimage < plat[1] + plat[3])
+			{
+				response = false;
+			}
+			if(yimage > plat[1] && yimage + Robot.height < plat[1] + plat[3])
+			{
+				response = false;
+			}
+			
+			if(response == false) //if there's a Y problem
+			{
+				response = true;
+				
+				if(Robot.y > 0)
+				{
+					diff = plat[1] - (Robot.y + Robot.height);
+					if(diff < minspeed)
+						minspeed = diff;
+				}
+				else
+				{
+					diff = Robot.y - (plat[1] + plat[3]);
+					if(diff > minspeed)
+						minspeed = diff;
+				}
+				
+				if(ximage > plat[0] && ximage < plat[0] + plat[2])
+				{
+					response = false;
+				}
+				if(ximage > plat[0] && ximage + Robot.width < plat[0] + plat[2])
+				{
+					response = false;
+				}
+			}
+		}
+		
+		Robot.speedY = minspeed;
+		
+		return response;
+	}
+	
+	public static boolean onGround()
+	{
+		boolean response = false;
+		
+		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
+		
+		for(int[] plat : plats)
+		{
+			if(Robot.x > plat[0] && Robot.x < plat[0] + plat[2])
+			{
+				response = true;
+			}
+			if(Robot.x > plat[0] && Robot.x + Robot.width < plat[0] + plat[2])
+			{
+				response = true;
+			}
+			
+			if(response)
+			{
+				if((Robot.y + Robot.height) == (plat[1]))
+				{
+					break;
+				}
+				else
+				{
+					response = false;
+				}
+			}
+		}
+		
+		
+		return response;
+	}
+
 	public static int getHealth() {
 		return Robot.health;
 	}
@@ -127,139 +353,7 @@ public class Robot
 	public static void setBestCascade(int bestCascade) {
 		Robot.bestCascade = bestCascade;
 	}
-
-	public static int getX() {
-		return Robot.x;
-	}
-
-	public static void setX(int x) {
-		Robot.x = x;
-	}
-
-	public static int getY() {
-		return Robot.y;
-	}
-
-	public static void setY(int y) {
-		Robot.y = y;
-	}
-
-	public static int getSpeedX() {
-		return speedX;
-	}
-
-	public static void setSpeedX(int speedX) {
-		Robot.speedX = speedX;
-		
-		if(Robot.speedY > Robot.maxSpeed)
-		{
-			Robot.speedY = Robot.maxSpeed;
-		}
-		if(Robot.speedY < (-1)*Robot.maxSpeed)
-		{
-			Robot.speedY = (-1)*Robot.maxSpeed;
-		}
-	}
-
-	public static int getSpeedY() {
-		return speedY;
-	}
-
-	public static void setSpeedY(int speedY) {
-		Robot.speedY = speedY;
-		if(Robot.speedY > Robot.maxSpeed)
-		{
-			Robot.speedY = Robot.maxSpeed;
-		}
-	}
 	
-	public static void updateLoc()
-	{
-		if(!Robot.collideX())
-		{
-			Robot.x += Robot.speedX;
-		}
-		if(!Robot.collideY())
-		{
-			Robot.y += Robot.speedY;
-		}
-			
-	}
-	
-	public static boolean collideX()
-	{
-		boolean response = true;
-		
-		int ximage = Robot.x + Robot.speedX;
-		int yimage = Robot.y + 0;
-		
-		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
-		
-		for(int[] plat : plats)
-		{
-			if(ximage > plat[0] && ximage < plat[0] + plat[2])
-			{
-				response = false;
-				break;
-			}
-			if(ximage > plat[0] && ximage + Robot.width < plat[0] + plat[2])
-			{
-				response = false;
-				break;
-			}
-			if(yimage > plat[1] && yimage < plat[1] + plat[3])
-			{
-				response = false;
-				break;
-			}
-			if(ximage > plat[1] && ximage + Robot.height < plat[1] + plat[3])
-			{
-				response = false;
-				break;
-			}
-		}
-		
-		
-		return response;
-	}
-	
-	public static boolean collideY()
-	{
-boolean response = true;
-		
-		int ximage = Robot.x + 0;
-		int yimage = Robot.y + Robot.speedY;
-		
-		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
-		
-		for(int[] plat : plats)
-		{
-			if(ximage > plat[0] && ximage < plat[0] + plat[2])
-			{
-				response = false;
-				break;
-			}
-			if(ximage > plat[0] && ximage + Robot.width < plat[0] + plat[2])
-			{
-				response = false;
-				break;
-			}
-			if(yimage > plat[1] && yimage < plat[1] + plat[3])
-			{
-				response = false;
-				break;
-			}
-			if(ximage > plat[1] && ximage + Robot.height < plat[1] + plat[3])
-			{
-				response = false;
-				break;
-			}
-		}
-		
-		
-		return response;
-	}
-
 	public static int getHeight() {
 		return height;
 	}
