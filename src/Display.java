@@ -48,6 +48,7 @@ public class Display extends JPanel {
 	private static JLabel attackLabel;
 	// game panle
 	private static JPanel gamePanel;
+	private static JPanel actionPanel;
 
 	// Puzzle class
 	private static JPanel puzzlePanel;
@@ -434,5 +435,11 @@ public class Display extends JPanel {
 			actionActive = false;
 			puzzleActive = true;
 		}
+		else
+		{
+			actionActive = true;
+			puzzleActive = false;
+		}
+		
 	}
 }

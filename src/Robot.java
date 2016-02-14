@@ -175,5 +175,27 @@ public class Robot
 			Robot.speedY = Robot.maxSpeed;
 		}
 	}
+	
+	public static void updateLoc()
+	{
+		if(!Robot.collideX())
+		{
+			Robot.x += Robot.speedX;
+		}
+		if(!Robot.collideY())
+		{
+			Robot.y += Robot.speedY;
+		}
+			
+	}
+	
+	public static boolean collideX()
+	{
+		boolean response = true;
+		
+		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,w}
+		
+		return response;
+	}
 
 }
