@@ -4,11 +4,15 @@ public class Enemy {
 	private int attack;
 	private int speed;
 	private int defense;
-	public Enemy(int h, int a, int d, int s) {
+	private int posX;
+	private int posY;
+	public Enemy(int h, int a, int d, int s, int x, int y) {
 		this.setHealth(h);
 		this.setAttack(a);
 		this.setDefense(d);
 		this.setSpeed(s);
+		this.setPosX(x);
+		this.setPosY(y);
 	}
 	public int getDefense() {
 		return defense;
@@ -33,5 +37,17 @@ public class Enemy {
 	}
 	public void setHealth(int health) {
 		this.health = health;
+	}
+	public int getPosY() {
+		return posY;
+	}
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+	public int getPosX() {
+		return posX;
+	}
+	public void setPosX(int posX) {
+		this.posX = posX;
 	}
 }
