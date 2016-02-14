@@ -284,7 +284,7 @@ public class Puzzle {
 		for (int i = 0; i < 7; i++) {
 			for (int k = 0; k < 10; k++) {
 				if (puzzleGrid[i][k] == 0) {
-					puzzleGrid[i][k] = (int) (Math.random() * 4) + 2;
+					puzzleGrid[i][k] = (int) (Math.random() * 4) + 1;
 				}
 			}
 		}
