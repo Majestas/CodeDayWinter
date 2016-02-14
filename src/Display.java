@@ -423,6 +423,8 @@ public class Display extends JPanel {
 			puzzlePanel.add(tempLabel);
 			
 		}
+		
+		
 
 		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
@@ -436,22 +438,17 @@ public class Display extends JPanel {
 	public static void initActionScreen() throws IOException {
 		
 		
-		actionPanel = new JPanel(null);
+		
+		actionPanel = new JPanel(new BorderLayout());
 		actionPanel.setPreferredSize(new Dimension(1000, 720));
-		//actionPanel.setBackground(Color.GREEN);
-		
-		
-		
-		
-		
+		actionPanel.setBackground(Color.BLUE);
 
-        	
-			JLabel temp1 = createImageLabel("src/action/heart.png");
-			temp1.setLocation(700, 200);
-			actionPanel.add(temp1);
-        	
-        	gamePanel.add(actionPanel, BorderLayout.CENTER);
-      		mainFrame.add(gamePanel, BorderLayout.CENTER);
+		
+		
+		gamePanel.add(actionPanel, BorderLayout.CENTER);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
+      		
+		updateActionScreen();
     }
 		
 		
@@ -459,15 +456,13 @@ public class Display extends JPanel {
 		
 
 
-	public static void updateActionScreen(int[][] platformsArray2) {
+	public static void updateActionScreen() {
 
-		/*JLayeredPane tempPanel1 = new JLayeredPane();
-		JLabel tempJL = createImageLabel("src/action/factory.jpg");
-		tempPanel1.add(tempJL);
-		tempPanel1.setVisible(true);
-		tempPanel1.setSize(new Dimension(500,500));
-		actionPanel.add(tempPanel1,new Integer(2));
-		//actionPanel.add(tempJL);*/
+		//JLabel temp8 = createImageLabel("src/action/factory.jpg");
+		//temp8.setLocation(500, 200);
+		//actionPanel.add(temp8);
+		
+		
 		int [][] platformsArray = new int[][] {{200, 500, 50, 30}, {100,300,50,30}};
 		
 		for (int i = 0; i < platformsArray.length; i ++){
@@ -481,7 +476,14 @@ public class Display extends JPanel {
 		
 		
 		puzzlePanel.removeAll();
-		puzzlePanel.revalidate();
+		actionPanel.revalidate();
+		
+		JLabel temp7 = createImageLabel("src/action/platform.png");
+		temp7.setLocation(500, 200);
+		actionPanel.add(temp7);
+		
+		JLabel temp9 = new JLabel("src/action/");
+		actionPanel.add(temp9);
 		
 		gamePanel.add(actionPanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
@@ -559,7 +561,7 @@ public class Display extends JPanel {
 
 			//updateActionScreen();
 
-			updateActionScreen(Robot.getPlats());
+			updateActionScreen();
 
 			gamePanel.revalidate();
 			
