@@ -4,7 +4,7 @@ public class Robot
 	private static int health = 1;
 	private static int attack = 1;
 	private static int defense = 0;
-	private static int speed = 1;
+	private static int speed = 5;
 	private static int maxSpeed = 3 * speed;
 	private static int speedX = 0;
 	private static int speedY = 0;
@@ -24,7 +24,7 @@ public class Robot
 	private static int y = 0;
 	private static int height = 22;
 	private static int width = 15;
-	private static int[][] plats = {{0,400, 1000, 50}}; //fake platform in center of screen
+	private static int[][] plats = {{0,50,100,20}};// {0,400, 1000, 200}}; //fake platform in center of screen
 	
 	
 	public Robot(int startx, int starty)
@@ -111,7 +111,7 @@ public class Robot
 	
 	public static boolean collideX()
 	{
-		boolean response = true;
+		boolean response = false;
 		
 		int ximage = Robot.x + Robot.speedX;
 		int yimage = Robot.y + 0;
@@ -129,18 +129,16 @@ public class Robot
 		{
 			if(ximage > plat[0] && ximage < plat[0] + plat[2])
 			{
-				response = false;
-				break;
+				response = true;
 			}
 			if(ximage > plat[0] && ximage + Robot.width < plat[0] + plat[2])
 			{
-				response = false;
-				break;
+				response = true;
 			}
 			
-			if(response == false)
+			if(response == true)
 			{
-				response = true;
+				response = false;
 				
 				if(Robot.x > 0)
 				{
@@ -157,24 +155,25 @@ public class Robot
 				
 				if(yimage > plat[1] && yimage < plat[1] + plat[3])
 				{
-					response = false;
+					response = true;
 					break;
 				}
 				if(ximage > plat[1] && ximage + Robot.height < plat[1] + plat[3])
 				{
-					response = false;
+					response = true;
 					break;
 				}
 			}
 		}
-		
+		if(minspeed < 999999 && minspeed > 999999)
+			Robot.speedX = minspeed;
 		
 		return response;
 	}
 	
 	public static boolean collideY()
 	{
-		boolean response = true;
+		boolean response = false;
 		
 		int ximage = Robot.x + 0;
 		int yimage = Robot.y + Robot.speedY;
@@ -192,16 +191,16 @@ public class Robot
 		{
 			if(yimage > plat[1] && yimage < plat[1] + plat[3])
 			{
-				response = false;
+				response = true;
 			}
 			if(yimage > plat[1] && yimage + Robot.height < plat[1] + plat[3])
 			{
-				response = false;
+				response = true;
 			}
 			
-			if(response == false) //if there's a Y problem
+			if(response == true) //if there's a Y problem
 			{
-				response = true;
+				response = false;
 				
 				if(Robot.y > 0)
 				{
@@ -218,17 +217,21 @@ public class Robot
 				
 				if(ximage > plat[0] && ximage < plat[0] + plat[2])
 				{
-					response = false;
+					response = true;
+					break;
 				}
 				if(ximage > plat[0] && ximage + Robot.width < plat[0] + plat[2])
 				{
-					response = false;
+					response = true;
+					break;
 				}
 			}
 		}
+		if(minspeed < 999999 && minspeed > 999999)
+			Robot.speedY = minspeed;
 		
-		Robot.speedY = minspeed;
 		
+		//response = false;
 		return response;
 	}
 	
@@ -251,7 +254,7 @@ public class Robot
 			
 			if(response)
 			{
-				if((Robot.y + Robot.height) == (plat[1]))
+				if((Robot.y + Robot.height) >= (plat[1]) && (Robot.y + Robot.height) <= plat[1] + plat[3])
 				{
 					break;
 				}
@@ -262,20 +265,32 @@ public class Robot
 			}
 		}
 		
+		if(Robot.y + Robot.height >= 400)
+		{
+			response = true;
+		}
+		//response = false;
+		
+		if(response == true && Robot.speedY > 0)
+			Robot.speedY = 0;
 		
 		return response;
 	}
 	
 	public static void tick() //gravity
 	{
+		Robot.updateLoc();
+		System.out.println("Tick");
+		
 		boolean ground = Robot.onGround();
+		System.out.println(ground);
 		
 		if(Robot.speedX > 0 && ground)
 			Robot.speedX -= 1;
 		else if(Robot.speedX < 0 && ground)
 			Robot.speedX += 1;
 		
-		if(Robot.speedY != 0 && !ground)
+		if(!ground)
 			Robot.speedY += 1;
 	}
 

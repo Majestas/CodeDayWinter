@@ -9,7 +9,9 @@ public class Database {
 	public static boolean connected = false;
 	public static Connection conn;
 
+	static String[][] players;
 	static String player;
+	static int playerID = 1;
 	static int level;
 	static int health;
 	static int attack;
@@ -25,7 +27,9 @@ public class Database {
 	static int shotsTaken;
 	static int numOfMatchesIn1Game;
 	
-	static int[][] platforms = new int[4][4];
+	static int[][] platforms = new int[3][4];
+	
+	static String[][] stats = new String[100][2];
 	
 	public static void main(String[] args)
 	{
@@ -39,6 +43,8 @@ public class Database {
 		{
 			conn = getConnection();
 			readPlatforms();
+			readPlayer();
+			readStats();
 		}
 		catch (SQLException e)
 		{
@@ -63,38 +69,75 @@ public class Database {
 		return player;
 	}
 
-	public static void setPlayer(String player) {
+	public static void setPlayer(String player) throws SQLException {
 		Database.player = player;
+		writePlayer();
+	}
+	
+	public static int getPlayerID() {
+		return playerID;
+	}
+	
+	public static void setPlayerID(int playerID) {
+		Database.playerID = playerID;
+	}
+	
+	public static String[][] getPlayers() {
+		return players;
+	}
+	
+	public static void setPlayers(String[][] players) {
+		Database.players = players;
 	}
 	
 	public static void readPlayer() throws SQLException {
 		
 	    Statement stmt = null;
-	    String query = "SELECT LengthX, WidthY "+
-	                   "FROM mydb.Platforms";
+	    String query = "SELECT ID, Name, Level " +
+	                   "FROM mydb.Players";
 	    try {
 	        stmt = conn.createStatement();
 	        ResultSet rs = stmt.executeQuery(query);
 	        int i = 0;
 	        while (rs.next()) {
-	            int length = rs.getInt("LengthX");
-	            int width = rs.getInt("WidthY");
-	            platforms[i][0] = (int) (Math.random() * (1000) + 1);
-	            platforms[i][1] = (int) (Math.random() * (600) + 100);
-	            platforms[i][2] = length;
-	            platforms[i][3] = width;
+	        	if (i == 0)
+	        	{
+	        		playerID = rs.getInt("ID");
+	        		player = rs.getString("Name");
+		            level = rs.getInt("Level");
+	        	}
+	        	else
+	        	{
+	        		players[i-1][0] = String.valueOf(rs.getInt("ID"));
+	        		players[i-1][1] = rs.getString("Name");
+	        		players[i-1][2] = String.valueOf(rs.getInt("Level"));
+	        	}
 	            i++;
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        platforms = new int[4][4];
+	        players = new String[1][1];
 	    } finally {
 	        if (stmt != null) { stmt.close(); }
 	    }
 		
 	}
 	
-	public static void writePlayer() {
+	public static void writePlayer() throws SQLException {
+		
+	    Statement stmt = null;
+	    String query = "UPDATE mydb.Players " +
+	                   "SET Level=" + level + 
+	                   "WHERE ID=" + playerID;
+	    try {
+	        stmt = conn.createStatement();
+	        stmt.executeQuery(query);
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        players = new String[1][1];
+	    } finally {
+	        if (stmt != null) stmt.close();
+	    }
 		
 	}
 
@@ -259,8 +302,8 @@ public class Database {
 	        while (rs.next()) {
 	            int length = rs.getInt("LengthX");
 	            int width = rs.getInt("WidthY");
-	            platforms[i][0] = (int) (Math.random() * (1000) + 1);
-	            platforms[i][1] = (int) (Math.random() * (600) + 100);
+	            if (i > 2) platforms[i][0] = (int) (Math.random() * 1000 + 1);
+	            if (i > 2) platforms[i][1] = (int) ((Math.random()*11) * 60 );
 	            platforms[i][2] = length;
 	            platforms[i][3] = width;
 	            i++;
@@ -282,11 +325,121 @@ public class Database {
 		Database.health = health;
 	}
 	
-	public static void readHealth() {
+	public static void readStats() throws SQLException
+	{
+		
+	    Statement stmt = null;
+	    String query1 = "SELECT Value, Stats_ID "+
+	                    "FROM mydb.PlayerStats " +
+	                    "WHERE Players_ID=" + playerID;
+	    String query2 = "SELECT ID, Name "+
+                		"FROM mydb.Stats";
+	    try {
+	        stmt = conn.createStatement();
+	        ResultSet rs1 = stmt.executeQuery(query1);
+	        stmt = conn.createStatement();
+	        ResultSet rs2 = stmt.executeQuery(query2);
+	        int i = 0;
+	        while(rs2.next())
+	        {
+	        	stats[i][0] = String.valueOf(rs2.getInt("ID"));
+	        	stats[i][1] = rs2.getString("Name");
+	        }
+	        i = 0;
+	        int[] values = new int[100];
+	        while (rs1.next()) {
+	            if (rs1.getInt("Stats_ID") == Integer.parseInt(stats[i][0])) values[i] = rs1.getInt("Value");
+	        }
+	        health = values[0];
+	        attack = values[1];
+	        defense = values[2];
+	        speed = values[3];
+	        kills = values[4];
+	    	matches = values[5];
+	    	tilesCleared = values[6];
+	    	tileTypeCleared = values[7];
+	    	shotsFired = values[8];
+	    	shotsHit = values[9];
+	    	shotsTaken = values[10];
+	    	numOfMatchesIn1Game = values[11];
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        health = 0;
+	    } finally {
+	        if (stmt != null) { stmt.close(); }
+	    }
 		
 	}
 	
-	public static void writeHealth() {
+	public static void writeStats() throws SQLException {
+		
+		Statement stmt = null;
+	    try {
+		    String query = "UPDATE mydb.PlayerStats " +
+		    				"SET Value=" + health +
+		    				"WHERE Stats_ID=" + Integer.parseInt(stats[0][0]);
+	        stmt = conn.createStatement();
+	        stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + attack +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[1][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + defense +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[2][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + speed +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[3][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + kills +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[4][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + matches +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[5][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + tilesCleared +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[6][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + tileTypeCleared +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[7][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + shotsFired +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[8][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + shotsHit +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[9][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + shotsTaken +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[10][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+		    query = "UPDATE mydb.PlayerStats " +
+    				"SET Value=" + numOfMatchesIn1Game +
+    				"WHERE Stats_ID=" + Integer.parseInt(stats[11][0]);
+		    stmt = conn.createStatement();
+		    stmt.executeQuery(query);
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (stmt != null) { stmt.close(); }
+	    }
 		
 	}
 

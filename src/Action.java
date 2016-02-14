@@ -8,6 +8,8 @@ public class Action {
 	
 	public static void move(KeyEvent e)
 	{
+		//System.out.println(e);
+		
 		switch(e.getKeyCode())
 		{
 			case(KeyEvent.VK_UP):
@@ -23,7 +25,9 @@ public class Action {
 			case(KeyEvent.VK_LEFT):
 			{
 				Robot.setSpeedX(Robot.getSpeedX() - Robot.getSpeed());
+				System.out.println(e);
 				break;
+				
 			}
 			case(KeyEvent.VK_RIGHT):
 			{

@@ -80,16 +80,80 @@ public class Display extends JPanel {
 		initStatsPanel();
 		initGamePanel();
 		initPuzzleScreen();
-		initActionScreen();
-		updateActionScreen();
-		// updatePuzzleScreen();
+		//initActionScreen();
+		actionPanel = new JPanel(null);
+		actionPanel.setPreferredSize(new Dimension(1000, 720));
+		//actionPanel.setBackground();
+		
+		JLabel platform1 = createImageLabel("src/action/platform.png");
+		platform1.setVisible(true);
+		platform1.setBounds(0,300,1000,300);
+		actionPanel.add(platform1);
+		//actionPanel.setComponentZOrder(platform1, 1);
+		
+		JLabel background1 = createImageLabel("src/action/sprite_3.png", 100, 100);
+		background1.setVisible(true);
+		background1.setBounds(Robot.getX(),Robot.getY(), 50,50);
+		//background1.setLocation(0, 0);
+		actionPanel.add(background1);
+		//actionPanel.setComponentZOrder(background1, 0);
+		
 		Puzzle.runPuzzle(5+(level*5));
+		
+		for(int i = 0; i < 300000; i ++)
+		{
+			background1.setBounds(Robot.getX(), Robot.getY(), 50, 50);
+			System.out.println(Robot.getX() + ", " + Robot.getY());
+			System.out.println(Robot.getSpeedX()+ ", " + Robot.getSpeedY());
+			actionPanel.revalidate();
+			Robot.tick();
+			delay(50);
+		}
+		
+		
+		
+		
+		//updateActionScreen();
+		// updatePuzzleScreen();
+		//
 		// changeMode();
+		
+		
+		
+	}
+	public static void example()
+	{
+		/*
+		JLabel background1 = createImageLabel("src/action/factory.jpg");
+		background1.setVisible(true);
+		background1.setBounds(Robot.getX(),Robot.getY(), 50,50);
+		//background1.setLocation(0, 0);
+		actionPanel.add(background1);
+		actionPanel.setComponentZOrder(background1, 0);
+		
+		Puzzle.runPuzzle(5+(level*5));
+		for(int i = 0; i < 300; i ++)
+		{
+			background1.setBounds(Robot.getX(), Robot.getY(), 50, 50);
+			System.out.println(Robot.getX() + ", " + Robot.getY());
+			System.out.println(Robot.getSpeedX()+ ", " + Robot.getSpeedY());
+			actionPanel.revalidate();
+			Robot.tick();
+			delay(100);
+		}
+		*/
 	}
 
+	public static void delay(int time)
+	{
+		long startDelay = System.currentTimeMillis();
+		long endDelay = 0;
+		while (endDelay - startDelay < time)
+			endDelay = System.currentTimeMillis();
+	}
 	private static void initMainFrame() {
 
-		mainFrame = new JFrame("Robot Resuce");
+		mainFrame = new JFrame("Robot Revolution");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setPreferredSize(new Dimension(1280, 720));
 		mainFrame.setVisible(true);
@@ -157,9 +221,11 @@ public class Display extends JPanel {
 		});
 		GameMenu.add(regenerateOption);
 
+		
 		JMenu StatsMenu = new JMenu("Stats");
 		StatsMenu.setMnemonic(KeyEvent.VK_T);
 		menuBar.add(StatsMenu);
+		
 		JMenuItem statsOption = new JMenuItem("View Stats");
 		statsOption.addActionListener(new ActionListener() {
 			
@@ -168,6 +234,8 @@ public class Display extends JPanel {
 				displayStats();
 			}
 		});
+		StatsMenu.add(statsOption);
+		
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.setVisible(true);
 	}
@@ -440,9 +508,7 @@ public class Display extends JPanel {
 			
 		}
 		
-		JLabel temp17 = createImageLabel("src/action/platform.png");
-		temp17.setLocation(500, 700);
-		actionPanel.add(temp17);
+		
 
 		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
@@ -457,16 +523,17 @@ public class Display extends JPanel {
 		
 		
 		
-		actionPanel = new JPanel(null);
-		actionPanel.setPreferredSize(new Dimension(1000, 720));
-		actionPanel.setBackground(Color.BLUE);
+		
 
+		
+		
 		
 		
 		gamePanel.add(actionPanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
       		
 		//updateActionScreen();
+		
     }
 		
 		
@@ -493,14 +560,17 @@ public class Display extends JPanel {
 		}
 		
 		
+		
 		puzzlePanel.removeAll();
 		actionPanel.revalidate();
 		
 		
 		
-		JLabel temp9 = createImageLabel("src/action/platform.png");
-		//temp9.setLocation(500, 400);
-		actionPanel.add(temp9);
+		JLabel temp10 = createImageLabel("src/action/platform.png");
+		temp10.setVisible(true);
+		//temp10.setLayout(null);
+		temp10.setLocation(600, 400);
+		actionPanel.add(temp10);
 		
 		
 		actionPanel.revalidate();
@@ -579,11 +649,14 @@ public class Display extends JPanel {
 			gamePanel.revalidate();
 			
 			actionPanel.setVisible(true);
+			
+			example();
 
 			//updateActionScreen();
 
 			updateActionScreen();
 
+			actionPanel.revalidate();
 			gamePanel.revalidate();
 			
 
