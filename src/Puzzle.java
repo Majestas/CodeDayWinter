@@ -284,7 +284,7 @@ public class Puzzle {
 		for (int i = 0; i < 7; i++) {
 			for (int k = 0; k < 10; k++) {
 				if (puzzleGrid[i][k] == 0) {
-					puzzleGrid[i][k] = (int) (Math.random() * 4) + 1;
+					puzzleGrid[i][k] = (int) (Math.random() * 4) + 2;
 				}
 			}
 		}
@@ -331,6 +331,7 @@ public class Puzzle {
 		}
 		displayGrid();
 		moves++;
+		checkMoves();
 		checkMatches();
 	}
 
@@ -344,6 +345,7 @@ public class Puzzle {
 				highlightedGrid[boxY][boxX + 1] -= 4;
 				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxX++;
+				displayGrid();
 			}
 			break;
 		}
@@ -354,6 +356,7 @@ public class Puzzle {
 				highlightedGrid[boxY][boxX + 1] -= 4;
 				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxX--;
+				displayGrid();
 			}
 			break;
 		}
@@ -364,6 +367,7 @@ public class Puzzle {
 				highlightedGrid[boxY][boxX + 1] -= 4;
 				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxY--;
+				displayGrid();
 			}
 			break;
 		}
@@ -374,11 +378,12 @@ public class Puzzle {
 				highlightedGrid[boxY][boxX + 1] -= 4;
 				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxY++;
+				displayGrid();
 			}
 			break;
 		}
 		System.out.println(boxX + "\n" + boxY);
-		displayGrid();
+		//displayGrid();
 	}
 
 	public static void checkMoves() {

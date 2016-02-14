@@ -335,6 +335,7 @@ public class Display extends JPanel {
 		 */
 
 		puzzlePanel.removeAll();
+		puzzlePanel.revalidate();
 
 		for (int k = 0; k < gearArray.size(); k++) {
 			switch (gearArray.get(k)) {
@@ -347,46 +348,55 @@ public class Display extends JPanel {
 			}
 			case 1: {
 				JLabel tempLabel = createImageLabel("src/action/healthGear.png", 90, 90);
+				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 2: {
 				JLabel tempLabel = createImageLabel("src/action/defenseGear.png", 90, 90);
 				puzzlePanel.add(tempLabel);
+				tempLabel.setVisible(true); 
 				break;
 			}
 			case 3: {
 				JLabel tempLabel = createImageLabel("src/action/attackGear.png", 90, 90);
+				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 4: {
 				JLabel tempLabel = createImageLabel("src/action/speedGear.png", 90, 90);
+				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 5: {
 				JLabel tempLabel = createImageLabel("src/action/healthGearHighlighted.png", 90, 90);
+				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 6: {
 				JLabel tempLabel = createImageLabel("src/action/defenseGearHighlighted.png", 90, 90);
+				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 7: {
 				JLabel tempLabel = createImageLabel("src/action/attackGearHighlighted.png", 90, 90);
+				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 8: {
 				JLabel tempLabel = createImageLabel("src/action/speedGearHighlighted.png", 90, 90);
+				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			default: {
 				JLabel tempLabel = createImageLabel("src/action/factory.jpg", 90, 90);
+				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
@@ -394,7 +404,6 @@ public class Display extends JPanel {
 		}
 
 		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
-
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 
 	}
