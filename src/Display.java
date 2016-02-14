@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -50,7 +51,7 @@ public class Display extends JPanel {
 	public static JLabel moveLabel;
 	// game panle
 	private static JPanel gamePanel;
-	//private static JPanel actionPanel;
+	// private static JPanel actionPanel;
 
 	// Puzzle class
 	private static JPanel puzzlePanel;
@@ -69,7 +70,7 @@ public class Display extends JPanel {
 		initActionScreen();
 		// updatePuzzleScreen();
 		Puzzle.runPuzzle(10);
-		//changeMode();
+		// changeMode();
 	}
 
 	private static void initMainFrame() {
@@ -177,7 +178,7 @@ public class Display extends JPanel {
 		statsPanel.add(levelLabel, c);
 
 		////
-		healthLabel = new JLabel("Health:", JLabel.LEADING);
+		healthLabel = new JLabel("Health: 000", JLabel.LEADING);
 		healthLabel.setFont(new Font("futura", Font.PLAIN, fontSize));
 		c.gridx = 1;
 		c.gridy = 2;
@@ -190,7 +191,7 @@ public class Display extends JPanel {
 		///////
 
 		///
-		attackLabel = new JLabel("Attack:", JLabel.LEADING);
+		attackLabel = new JLabel("Attack: 000", JLabel.LEADING);
 		attackLabel.setFont(new Font("futura", Font.PLAIN, fontSize));
 		c.gridx = 1;
 		c.gridy = 3;
@@ -203,7 +204,7 @@ public class Display extends JPanel {
 		///
 
 		//
-		defenseLabel = new JLabel("Defense:", JLabel.LEADING);
+		defenseLabel = new JLabel("Defense: 000", JLabel.LEADING);
 		defenseLabel.setFont(new Font("futura", Font.PLAIN, fontSize));
 		c.gridx = 1;
 		c.gridy = 4;
@@ -216,7 +217,7 @@ public class Display extends JPanel {
 		//
 
 		//
-		speedLabel = new JLabel("Speed:", JLabel.LEADING);
+		speedLabel = new JLabel("Speed: 000", JLabel.LEADING);
 		speedLabel.setFont(new Font("futura", Font.PLAIN, fontSize));
 		c.gridx = 1;
 		c.gridy = 5;
@@ -227,9 +228,9 @@ public class Display extends JPanel {
 		c.gridy = 5;
 		statsPanel.add(speedImageLabel, c);
 		//
-		
+
 		//
-		moveLabel = new JLabel("Moves:", JLabel.LEADING);
+		moveLabel = new JLabel("Moves: 000", JLabel.LEADING);
 		moveLabel.setFont(new Font("futura", Font.PLAIN, fontSize));
 		c.gridx = 1;
 		c.gridy = 6;
@@ -265,8 +266,8 @@ public class Display extends JPanel {
 				if (actionActive) {
 
 					Action.move(e);
-				} 
-				
+				}
+
 				else if (puzzleActive) {
 					switch (e.getKeyCode()) {
 
@@ -334,8 +335,8 @@ public class Display extends JPanel {
 		puzzlePanel.setPreferredSize(new Dimension(1000, 720));
 		puzzlePanel.setBackground(Color.BLACK);
 
-		//gamePanel.add(puzzlePanel, BorderLayout.CENTER);
-		//mainFrame.add(gamePanel, BorderLayout.CENTER);
+		// gamePanel.add(puzzlePanel, BorderLayout.CENTER);
+		// mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
 
 	public static void updatePuzzleScreen(int[][] puzzleGrid) {
@@ -372,7 +373,7 @@ public class Display extends JPanel {
 			case 2: {
 				JLabel tempLabel = createImageLabel("src/action/defenseGear.png");
 				puzzlePanel.add(tempLabel);
-				tempLabel.setVisible(true); 
+				tempLabel.setVisible(true);
 				break;
 			}
 			case 3: {
@@ -428,22 +429,24 @@ public class Display extends JPanel {
 	public static void hidePuzzelScreen() {
 
 	}
-	
-	public static void initActionScreen(){
-		actionPanel = new JPanel();
-		actionPanel.setPreferredSize(new Dimension(1000, 720));
-		actionPanel.setBackground(Color.BLACK);
-		actionPanel.setVisible(false);
 
-		gamePanel.add(actionPanel, BorderLayout.CENTER);
-		mainFrame.add(gamePanel, BorderLayout.CENTER);
-	}
-	public static void updateActionScreen(){
+	public static void initActionScreen() {
 		
+		  actionPanel = new JPanel(); actionPanel.setPreferredSize(new
+		  Dimension(1000, 720)); actionPanel.setBackground(Color.BLACK);
+		  actionPanel.setVisible(false);
+		 
+		
+
+	gamePanel.add(actionPanel,BorderLayout.CENTER);
+	mainFrame.add(gamePanel,BorderLayout.CENTER);
+
+}
+
+	public static void updateActionScreen() {
+
 	}
 
-	
-	
 	public static ArrayList<Integer> interpret2dArray(int[][] puzzleGrid) {
 		ArrayList<Integer> tempArray = new ArrayList<Integer>();
 
@@ -470,7 +473,7 @@ public class Display extends JPanel {
 		return imageLabel;
 
 	}
-	
+
 	public static JLabel createImageLabel(String filePath) {
 
 		BufferedImage image = null;
@@ -485,35 +488,31 @@ public class Display extends JPanel {
 		return imageLabel;
 
 	}
-	
-	
 
 	public static void changeMode() {
 		level += 1;
-		levelLabel.setText("Level: "+ level);
-		
+		levelLabel.setText("Level: " + level);
+
 		if (actionActive) {
 			actionActive = false;
 			puzzleActive = true;
 			actionPanel.setVisible(false);
 			actionPanel.removeAll();
-			
+
 			puzzlePanel.setVisible(true);
-			
+
 			Puzzle.runPuzzle(10);
-			//gamePanel.revalidate();
-			//initPuzzleScreen();
+			// gamePanel.revalidate();
+			// initPuzzleScreen();
 			gamePanel.revalidate();
 
-		}
-		else if (puzzleActive)
-		{
+		} else if (puzzleActive) {
 			actionActive = true;
 			puzzleActive = false;
 			puzzlePanel.setVisible(false);
 			puzzlePanel.removeAll();
 			gamePanel.revalidate();
 		}
-		
+
 	}
 }
