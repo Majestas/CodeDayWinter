@@ -500,7 +500,7 @@ public class Display extends JPanel {
 			actionPanel.removeAll();
 			moveLabel.setVisible(true);
 			puzzlePanel.setVisible(true);
-			Puzzle.runPuzzle(10);
+			Puzzle.runPuzzle(5+(5*level));
 			// gamePanel.revalidate();
 			// initPuzzleScreen();
 			gamePanel.revalidate();
