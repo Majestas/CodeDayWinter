@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -442,10 +443,12 @@ public class Display extends JPanel {
 	public static void updateActionScreen() {
 
 		JLayeredPane tempPanel1 = new JLayeredPane();
-		tempPanel1.add(createImageLabel("src/action/factory.jpg"));
+		JLabel tempJL = createImageLabel("src/action/factory.jpg");
+		tempPanel1.add(tempJL);
 		tempPanel1.setVisible(true);
 		tempPanel1.setSize(new Dimension(500,500));
-		actionPanel.add(tempPanel1,new Integer(2));	
+		actionPanel.add(tempPanel1,new Integer(2));
+		//actionPanel.add(tempJL);
 	}
 
 	public static ArrayList<Integer> interpret2dArray(int[][] puzzleGrid) {
@@ -485,6 +488,7 @@ public class Display extends JPanel {
 		}
 
 		JLabel imageLabel = new JLabel(new ImageIcon(image));
+		imageLabel.setBounds(0, 0, 100, 100);
 
 		return imageLabel;
 
