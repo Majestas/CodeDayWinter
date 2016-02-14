@@ -10,6 +10,7 @@ public class Puzzle {
 			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 			};
+	private static int[][] highlightedGrid = new int[7][10];
 	private static int healthAdded = 0;
 	private static int defenseAdded = 0;
 	private static int attackAdded = 0;
@@ -299,7 +300,7 @@ public class Puzzle {
 			}
 		}
 		if(deletedTiles) {
-			Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
+			displayGrid();
 			dropTiles();
 		}
 	}
@@ -336,7 +337,7 @@ public class Puzzle {
 					}
 				}
 			}
-			Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
+			displayGrid();
 		} while(zeros);
 		checkMoves();
 	}
@@ -344,7 +345,7 @@ public class Puzzle {
 		moves = 0;
 		maxMoves = move;
 		createGrid();
-		Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
+		displayGrid();
 	}
 	public void rotate(int direction) {
 		int temp;
@@ -377,7 +378,7 @@ public class Puzzle {
 			puzzleGrid[boxY+1][boxX] = puzzleGrid[boxY+1][boxX+1];
 			puzzleGrid[boxY+1][boxX+1] = temp;
 		}
-		Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
+		displayGrid();
 		moves++;
 		checkMatches();
 	}
@@ -404,11 +405,19 @@ public class Puzzle {
 			}
 			break;
 		}
-		Display.updatePuzzleScreen(puzzleGrid, boxX, boxY);
+		displayGrid();
 	}
 	public static void checkMoves() {
 		if (moves == maxMoves) {
 			//Display.setMode();
 		}
+	}
+	public static void displayGrid() {
+		highlightedGrid = puzzleGrid;
+		highlightedGrid[boxY][boxX]+=4;
+		highlightedGrid[boxY+1][boxX]+=4;
+		highlightedGrid[boxY][boxX+1]+=4;
+		highlightedGrid[boxY+1][boxX+1]+=4;
+		Display.updatePuzzleScreen(highlightedGrid);
 	}
 }

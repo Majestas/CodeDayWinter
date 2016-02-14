@@ -268,7 +268,7 @@ public class Display {
 		mainFrame.add(gamePanel, BorderLayout.CENTER);		
 	}
 	
-	public static void updatePuzzleScreen(int [][] puzzleGrid, int boxX, int boxY){
+	public static void updatePuzzleScreen(int [][] puzzleGrid){
 		
 		ArrayList<Integer> gearArray = interpret2dArray(puzzleGrid);
 		
@@ -309,8 +309,27 @@ public class Display {
 				JLabel tempLabel = createImageLabel("src/action/speedGear.png",90,90);
 				puzzlePanel.add(tempLabel);	
 				break;
-			}		
-
+			}	
+			case 5: {
+				JLabel tempLabel = createImageLabel("src/action/healthGearHighlighted",90,90);
+				puzzlePanel.add(tempLabel);
+				break;
+			}
+			case 6: {
+				JLabel tempLabel = createImageLabel("src/action/defenseGearHighlighted",90,90);
+				puzzlePanel.add(tempLabel);
+				break;
+			}
+			case 7: {
+				JLabel tempLabel = createImageLabel("src/action/attackGearHighlighted.png",90,90);
+				puzzlePanel.add(tempLabel);
+				break;
+			}
+			case 8: {
+				JLabel tempLabel = createImageLabel("src/action/speedGearHighlighted.png",90,90);
+				puzzlePanel.add(tempLabel);
+				break;
+			}
 			}
 		}
 		
