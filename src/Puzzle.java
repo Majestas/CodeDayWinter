@@ -329,7 +329,7 @@ public class Puzzle {
 		createGrid();
 		displayGrid();
 	}
-	public void rotate(int direction) {
+	public static void rotate(int direction) {
 		int temp;
 		switch (direction) {
 		case 1: //Rotate Right
@@ -364,7 +364,7 @@ public class Puzzle {
 		moves++;
 		checkMatches();
 	}
-	public void moveBox(int direction) {
+	public static void moveBox(int direction) {
 		switch (direction) {
 		case 1: // right
 			if (boxX<8) {
