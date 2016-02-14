@@ -50,6 +50,9 @@ public class Display extends JPanel {
 	public static JLabel defenseLabel;
 	public static JLabel attackLabel;
 	public static JLabel moveLabel;
+	
+	public static JLabel moveImageLabel;
+	
 	// game panle
 	private static JPanel gamePanel;
 	// private static JPanel actionPanel;
@@ -237,7 +240,7 @@ public class Display extends JPanel {
 		c.gridy = 6;
 		statsPanel.add(moveLabel, c);
 		if(puzzleActive) {
-		JLabel moveImageLabel = createImageLabel("src/stats/moves.png", statsImageSize, statsImageSize);
+		moveImageLabel = createImageLabel("src/stats/moves.png", statsImageSize, statsImageSize);
 		c.gridx = 0;
 		c.gridy = 6;
 		statsPanel.add(moveImageLabel, c);
@@ -427,21 +430,22 @@ public class Display extends JPanel {
 
 	public static void initActionScreen() {
 		
-		  actionPanel = new JPanel(); actionPanel.setPreferredSize(new Dimension(1000, 720));
-		  actionPanel.setBackground(Color.BLACK);
-		  actionPanel.setVisible(false);
-		 
-		
+		actionPanel = new JPanel();
+		actionPanel.setPreferredSize(new Dimension(1000, 720));
+		actionPanel.setBackground(Color.GREEN);
 
-		  gamePanel.add(actionPanel,BorderLayout.CENTER);
-		  mainFrame.add(gamePanel,BorderLayout.CENTER);
-
+		gamePanel.add(actionPanel, BorderLayout.CENTER);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
+		updateActionScreen();
 }
 
 	public static void updateActionScreen() {
 
-		
-		
+		JLayeredPane tempPanel1 = new JLayeredPane();
+		tempPanel1.add(createImageLabel("src/action/factory.jpg"));
+		tempPanel1.setVisible(true);
+		tempPanel1.setSize(new Dimension(500,500));
+		actionPanel.add(tempPanel1,new Integer(2));	
 	}
 
 	public static ArrayList<Integer> interpret2dArray(int[][] puzzleGrid) {
@@ -495,7 +499,9 @@ public class Display extends JPanel {
 			puzzleActive = true;
 			actionPanel.setVisible(false);
 			actionPanel.removeAll();
+			
 			moveLabel.setVisible(true);
+			moveImageLabel.setVisible(true);
 			puzzlePanel.setVisible(true);
 			Puzzle.runPuzzle(5+(5*level));
 			// gamePanel.revalidate();
@@ -508,12 +514,14 @@ public class Display extends JPanel {
 			puzzlePanel.setVisible(false);
 			puzzlePanel.removeAll();
 			gamePanel.revalidate();
-
 			
 			actionPanel.setVisible(true);
+			updateActionScreen();
+			gamePanel.revalidate();
 			
 
 			moveLabel.setVisible(false);
+			moveImageLabel.setVisible(false);
 
 		}
 
