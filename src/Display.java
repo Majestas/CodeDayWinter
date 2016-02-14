@@ -69,6 +69,10 @@ public class Display extends JPanel {
 	// actionPanel
 	private static JPanel actionPanel;
 	private static JPanel actionBackgroundPanel;
+	
+	//Stats
+	private static JPanel dataPanel;
+	private static JPanel dataBackgroundPanel;
 
 	public static void initDisplay() throws IOException {
 		initMainFrame();
@@ -77,6 +81,7 @@ public class Display extends JPanel {
 		initGamePanel();
 		initPuzzleScreen();
 		initActionScreen();
+		updateActionScreen();
 		// updatePuzzleScreen();
 		Puzzle.runPuzzle(5+(level*5));
 		// changeMode();
@@ -152,6 +157,17 @@ public class Display extends JPanel {
 		});
 		GameMenu.add(regenerateOption);
 
+		JMenu StatsMenu = new JMenu("Stats");
+		StatsMenu.setMnemonic(KeyEvent.VK_T);
+		menuBar.add(StatsMenu);
+		JMenuItem statsOption = new JMenuItem("View Stats");
+		statsOption.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				displayStats();
+			}
+		});
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.setVisible(true);
 	}
@@ -423,6 +439,10 @@ public class Display extends JPanel {
 			puzzlePanel.add(tempLabel);
 			
 		}
+		
+		JLabel temp17 = createImageLabel("src/action/platform.png");
+		temp17.setLocation(500, 700);
+		actionPanel.add(temp17);
 
 		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
@@ -436,22 +456,17 @@ public class Display extends JPanel {
 	public static void initActionScreen() throws IOException {
 		
 		
+		
 		actionPanel = new JPanel(null);
 		actionPanel.setPreferredSize(new Dimension(1000, 720));
-		//actionPanel.setBackground(Color.GREEN);
-		
-		
-		
-		
-		
+		actionPanel.setBackground(Color.BLUE);
 
-        	
-			JLabel temp1 = createImageLabel("src/action/heart.png");
-			temp1.setLocation(700, 200);
-			actionPanel.add(temp1);
-        	
-        	gamePanel.add(actionPanel, BorderLayout.CENTER);
-      		mainFrame.add(gamePanel, BorderLayout.CENTER);
+		
+		
+		gamePanel.add(actionPanel, BorderLayout.CENTER);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
+      		
+		//updateActionScreen();
     }
 		
 		
@@ -459,15 +474,13 @@ public class Display extends JPanel {
 		
 
 
-	public static void updateActionScreen(int[][] platformsArray2) {
+	public static void updateActionScreen() {
 
-		/*JLayeredPane tempPanel1 = new JLayeredPane();
-		JLabel tempJL = createImageLabel("src/action/factory.jpg");
-		tempPanel1.add(tempJL);
-		tempPanel1.setVisible(true);
-		tempPanel1.setSize(new Dimension(500,500));
-		actionPanel.add(tempPanel1,new Integer(2));
-		//actionPanel.add(tempJL);*/
+		//JLabel temp8 = createImageLabel("src/action/factory.jpg");
+		//temp8.setLocation(500, 200);
+		//actionPanel.add(temp8);
+		
+		
 		int [][] platformsArray = new int[][] {{200, 500, 50, 30}, {100,300,50,30}};
 		
 		for (int i = 0; i < platformsArray.length; i ++){
@@ -481,8 +494,16 @@ public class Display extends JPanel {
 		
 		
 		puzzlePanel.removeAll();
-		puzzlePanel.revalidate();
+		actionPanel.revalidate();
 		
+		
+		
+		JLabel temp9 = createImageLabel("src/action/platform.png");
+		//temp9.setLocation(500, 400);
+		actionPanel.add(temp9);
+		
+		
+		actionPanel.revalidate();
 		gamePanel.add(actionPanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
@@ -542,12 +563,14 @@ public class Display extends JPanel {
 		if (actionActive) {
 			actionActive = false;
 			puzzleActive = true;
+			dataPanel.setVisible(false);
 			actionPanel.setVisible(false);
 			actionPanel.removeAll();
 			
 			moveLabel.setVisible(true);
 			moveImageLabel.setVisible(true);
 			puzzlePanel.setVisible(true);
+			dataPanel.setVisible(false);
 			Puzzle.runPuzzle(5+(5*level));
 			// gamePanel.revalidate();
 			// initPuzzleScreen();
@@ -564,7 +587,7 @@ public class Display extends JPanel {
 
 			//updateActionScreen();
 
-			updateActionScreen(Robot.getPlats());
+			updateActionScreen();
 
 			gamePanel.revalidate();
 			
@@ -575,6 +598,118 @@ public class Display extends JPanel {
 		}
 
 	}
-	
+	public static void displayStats() {
+		actionPanel.setVisible(false);
+		actionPanel.removeAll();
+		puzzlePanel.setVisible(false);
+		puzzlePanel.removeAll();
+		moveLabel.setVisible(false);
+		moveImageLabel.setVisible(false);
+		dataPanel.setVisible(true);
+		dataPanel = new JPanel(new GridBagLayout());
+		dataPanel.setPreferredSize(new Dimension(1000, 720));
+		dataPanel.setBackground(Color.RED);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridwidth = 1;
+		c.gridheight = 1;
+		c.weightx = 1;
+		c.ipadx = 10;
+		c.ipady = 50;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		int fontsize = 24;
+		
+	    JLabel healthStatLabel = new JLabel("Health: "+Robot.getHealth());
+		healthStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 1;
+		dataPanel.add(healthStatLabel, c);
+		
+		JLabel attackStatLabel = new JLabel("Attack: "+Robot.getAttack());
+		attackStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 2;
+		dataPanel.add(attackStatLabel, c);
+		
+		JLabel defenseStatLabel = new JLabel("Defense: "+Robot.getDefense());
+		defenseStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 3;
+		dataPanel.add(defenseStatLabel, c);
+		
+		JLabel speedStatLabel = new JLabel("Max Speed: "+Robot.getMaxSpeed());
+		speedStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 4;
+		dataPanel.add(speedStatLabel, c);
+		
+		JLabel killsLabel = new JLabel("Attack: "+Robot.getKills());
+		killsLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 5;
+		dataPanel.add(killsLabel, c);
+		
+		JLabel matchesLabel = new JLabel("Total Matches Made: "+Robot.getTotalMatches());
+		matchesLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 6;
+		dataPanel.add(matchesLabel, c);
+		
+		JLabel redLabel = new JLabel("Red Tiles Cleared: "+Robot.getRedTilesCleared());
+		redLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 7;
+		dataPanel.add(redLabel, c);
+		
+		JLabel blueLabel = new JLabel("Blue Tiles Cleared: "+Robot.getBlueTilesCleared());
+		blueLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 8;
+		dataPanel.add(blueLabel, c);
+		
+		JLabel greenLabel = new JLabel("Green Tiles Cleared: "+Robot.getGreenTilesCleared());
+		greenLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 9;
+		dataPanel.add(greenLabel, c);
+		
+		JLabel yellowLabel = new JLabel("Yellow Tiles Cleared: "+Robot.getYellowTilesCleared());
+		yellowLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 10;
+		dataPanel.add(yellowLabel, c);
+		
+		JLabel tilesLabel = new JLabel("Total Tiles Cleared: "+Robot.getTilesCleared());
+		tilesLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 11;
+		dataPanel.add(tilesLabel, c);
+		
+		JLabel cascadeLabel = new JLabel("Best Cascade: "+Robot.getBestCascade());
+		cascadeLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 12;
+		dataPanel.add(cascadeLabel, c);
+		
+		JLabel shotsFiredLabel = new JLabel("Shots Fired: "+Robot.getShotsFired());
+		shotsFiredLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 13;
+		dataPanel.add(shotsFiredLabel, c);
+		
+		JLabel shotsHitLabel = new JLabel("Shots Hit: "+Robot.getShotsHit());
+		shotsHitLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 14;
+		dataPanel.add(shotsHitLabel, c);
+		
+		JLabel shotsTakenLabel = new JLabel("Shots Taken: "+Robot.getShotsFired());
+		shotsFiredLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		c.gridx = 0;
+		c.gridy = 15;
+		dataPanel.add(shotsTakenLabel, c);
+		
+		gamePanel.revalidate();
+	}
 	
 }
