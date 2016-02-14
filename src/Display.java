@@ -453,7 +453,7 @@ public class Display extends JPanel {
 		for (int i = 0; i < platformsArray.length; i ++){
 			for (int k = 0; k < platformsArray[i].length; k++){
 				JLabel tempLabel = createImageLabel("src/action/platform.png");
-				tempLabel.setLocation(platformsArray[i][0], platformsArray[i][0];
+				tempLabel.setLocation(platformsArray[i][0], platformsArray[i][0]);
 			}
 		}
 	}
@@ -527,7 +527,7 @@ public class Display extends JPanel {
 			gamePanel.revalidate();
 			
 			actionPanel.setVisible(true);
-			updateActionScreen();
+			updateActionScreen(Robot.getPlats());
 			gamePanel.revalidate();
 			
 
