@@ -344,6 +344,7 @@ public class Puzzle {
 				highlightedGrid[boxY][boxX + 1] -= 4;
 				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxX++;
+				displayGrid();
 			}
 			break;
 		}
@@ -354,6 +355,7 @@ public class Puzzle {
 				highlightedGrid[boxY][boxX + 1] -= 4;
 				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxX--;
+				displayGrid();
 			}
 			break;
 		}
@@ -364,6 +366,7 @@ public class Puzzle {
 				highlightedGrid[boxY][boxX + 1] -= 4;
 				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxY--;
+				displayGrid();
 			}
 			break;
 		}
@@ -374,11 +377,12 @@ public class Puzzle {
 				highlightedGrid[boxY][boxX + 1] -= 4;
 				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxY++;
+				displayGrid();
 			}
 			break;
 		}
 		System.out.println(boxX + "\n" + boxY);
-		displayGrid();
+		//displayGrid();
 	}
 
 	public static void checkMoves() {
