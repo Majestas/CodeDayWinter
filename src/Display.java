@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -335,90 +336,84 @@ public class Display extends JPanel {
 		puzzlePanel.setPreferredSize(new Dimension(1000, 720));
 		puzzlePanel.setBackground(Color.BLACK);
 
-		// gamePanel.add(puzzlePanel, BorderLayout.CENTER);
-		// mainFrame.add(gamePanel, BorderLayout.CENTER);
+		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
 
 	public static void updatePuzzleScreen(int[][] puzzleGrid) {
 
 		ArrayList<Integer> gearArray = interpret2dArray(puzzleGrid);
 
-		/*
-		 * puzzleBackgroundPanel = new JPanel();
-		 * puzzleBackgroundPanel.setPreferredSize(new Dimension(1000,720));
-		 * puzzleBackgroundPanel.add(createImageLabel("src/action/factory.jpg",
-		 * 1000,720)); puzzlePanel.add(puzzleBackgroundPanel,
-		 * BorderLayout.CENTER);
-		 * puzzlePanel.setComponentZOrder(puzzleBackgroundPanel, 0);
-		 */
+		
+		 /*puzzleBackgroundPanel = new JPanel();
+		  puzzleBackgroundPanel.setPreferredSize(new Dimension(1000,720));
+		  
+		  puzzleBackgroundPanel.add(createImageLabel("src/action/factory.jpg",
+		  1000,720));
+		  puzzlePanel.add(puzzleBackgroundPanel,BorderLayout.CENTER);
+		  puzzlePanel.setComponentZOrder(puzzleBackgroundPanel, 0);
+		  puzzlePanel.add(puzzleBackgroundPanel,BorderLayout.CENTER);
+		  puzzlePanel.setComponentZOrder(puzzleBackgroundPanel, 1);*/
+		 
 
 		puzzlePanel.removeAll();
 		puzzlePanel.revalidate();
 
+		int normalHeight = 0;
+		int highlightedHeight = 0;
+		JLayeredPane tempLP = new JLayeredPane();
 		for (int k = 0; k < gearArray.size(); k++) {
+			JLabel tempLabel; 
+			
 			switch (gearArray.get(k)) {
 
+			
 			case 0: {
-				JLabel tempLabel = createImageLabel("src/action/blankGear.png");
-				puzzlePanel.add(tempLabel);
+				tempLabel = createImageLabel("src/action/blankGear.png");
+				puzzlePanel.add(tempLabel, normalHeight);
 
 				break;
 			}
 			case 1: {
-				JLabel tempLabel = createImageLabel("src/action/healthGear.png");
-				tempLabel.setVisible(true);
-				puzzlePanel.add(tempLabel);
+				 tempLabel = createImageLabel("src/action/healthGear.png");
 				break;
 			}
 			case 2: {
-				JLabel tempLabel = createImageLabel("src/action/defenseGear.png");
-				puzzlePanel.add(tempLabel);
-				tempLabel.setVisible(true);
+				tempLabel = createImageLabel("src/action/defenseGear.png");
 				break;
 			}
 			case 3: {
-				JLabel tempLabel = createImageLabel("src/action/attackGear.png");
-				tempLabel.setVisible(true);
-				puzzlePanel.add(tempLabel);
+				tempLabel = createImageLabel("src/action/attackGear.png");
 				break;
 			}
 			case 4: {
-				JLabel tempLabel = createImageLabel("src/action/speedGear.png");
-				tempLabel.setVisible(true);
-				puzzlePanel.add(tempLabel);
+				tempLabel = createImageLabel("src/action/speedGear.png");
 				break;
 			}
 			case 5: {
-				JLabel tempLabel = createImageLabel("src/action/healthGearHighlighted.png");
-				tempLabel.setVisible(true);
-				puzzlePanel.add(tempLabel);
+				tempLabel = createImageLabel("src/action/healthGearHighlighted.png");
 				break;
 			}
 			case 6: {
-				JLabel tempLabel = createImageLabel("src/action/defenseGearHighlighted.png");
-				tempLabel.setVisible(true);
-				puzzlePanel.add(tempLabel);
+				tempLabel = createImageLabel("src/action/defenseGearHighlighted.png");
 				break;
 			}
 			case 7: {
-				JLabel tempLabel = createImageLabel("src/action/attackGearHighlighted.png");
-				tempLabel.setVisible(true);
-				puzzlePanel.add(tempLabel);
+				tempLabel = createImageLabel("src/action/attackGearHighlighted.png");
 				break;
 			}
 			case 8: {
-				JLabel tempLabel = createImageLabel("src/action/speedGearHighlighted.png");
-				tempLabel.setVisible(true);
-				puzzlePanel.add(tempLabel);
+				tempLabel = createImageLabel("src/action/speedGearHighlighted.png");
 				break;
 			}
 			default: {
-				JLabel tempLabel = createImageLabel("src/action/factory.jpg");
-				tempLabel.setVisible(true);
-				puzzlePanel.add(tempLabel);
+				tempLabel = createImageLabel("src/action/factory.jpg");
 				break;
 			}
 			}
+			
+			puzzlePanel.add(tempLabel);
+			
 		}
 
 		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
@@ -432,19 +427,21 @@ public class Display extends JPanel {
 
 	public static void initActionScreen() {
 		
-		  actionPanel = new JPanel(); actionPanel.setPreferredSize(new
-		  Dimension(1000, 720)); actionPanel.setBackground(Color.BLACK);
+		  actionPanel = new JPanel(); actionPanel.setPreferredSize(new Dimension(1000, 720));
+		  actionPanel.setBackground(Color.BLACK);
 		  actionPanel.setVisible(false);
 		 
 		
 
-	gamePanel.add(actionPanel,BorderLayout.CENTER);
-	mainFrame.add(gamePanel,BorderLayout.CENTER);
+		  gamePanel.add(actionPanel,BorderLayout.CENTER);
+		  mainFrame.add(gamePanel,BorderLayout.CENTER);
 
 }
 
 	public static void updateActionScreen() {
 
+		
+		
 	}
 
 	public static ArrayList<Integer> interpret2dArray(int[][] puzzleGrid) {
@@ -512,6 +509,9 @@ public class Display extends JPanel {
 			puzzlePanel.setVisible(false);
 			puzzlePanel.removeAll();
 			gamePanel.revalidate();
+			
+			actionPanel.setVisible(true);
+			
 		}
 
 	}
