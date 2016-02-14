@@ -235,12 +235,12 @@ public class Display extends JPanel {
 		c.gridx = 1;
 		c.gridy = 6;
 		statsPanel.add(moveLabel, c);
-
+		if(puzzleActive) {
 		JLabel moveImageLabel = createImageLabel("src/stats/moves.png", statsImageSize, statsImageSize);
 		c.gridx = 0;
 		c.gridy = 6;
 		statsPanel.add(moveImageLabel, c);
-		//
+		}
 
 	}
 
