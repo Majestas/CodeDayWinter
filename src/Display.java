@@ -513,10 +513,11 @@ public class Display extends JPanel {
 	private static JLabel levelLabel;
 	private static JLabel robotNameLabel;
 
-	private static JLabel healthLabel;
-	private static JLabel speedLabel;
-	private static JLabel defenseLabel;
-	private static JLabel attackLabel;
+	public static JLabel healthLabel;
+	public static JLabel speedLabel;
+	public static JLabel defenseLabel;
+	public static JLabel attackLabel;
+	public static JLabel moveLabel;
 	// game panle
 	private static JPanel gamePanel;
 	//private static JPanel actionPanel;
@@ -535,7 +536,7 @@ public class Display extends JPanel {
 		initStatsPanel();
 		initGamePanel();
 		initPuzzleScreen();
-		//initActionScreen();
+		initActionScreen();
 		// updatePuzzleScreen();
 		Puzzle.runPuzzle(10);
 		//changeMode();
@@ -628,7 +629,7 @@ public class Display extends JPanel {
 		c.gridheight = 1;
 		c.weightx = 1;
 		c.ipadx = 10;
-		c.ipady = 70;
+		c.ipady = 50;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		int statsImageSize = 50;
 		int fontSize = 24;
@@ -695,6 +696,19 @@ public class Display extends JPanel {
 		c.gridx = 0;
 		c.gridy = 5;
 		statsPanel.add(speedImageLabel, c);
+		//
+		
+		//
+		moveLabel = new JLabel("Moves:", JLabel.LEADING);
+		moveLabel.setFont(new Font("futura", Font.PLAIN, fontSize));
+		c.gridx = 1;
+		c.gridy = 6;
+		statsPanel.add(moveLabel, c);
+
+		JLabel moveImageLabel = createImageLabel("src/stats/moves.png", statsImageSize, statsImageSize);
+		c.gridx = 0;
+		c.gridy = 6;
+		statsPanel.add(moveImageLabel, c);
 		//
 
 	}
@@ -814,61 +828,61 @@ public class Display extends JPanel {
 			switch (gearArray.get(k)) {
 
 			case 0: {
-				JLabel tempLabel = createImageLabel("src/action/blankGear.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/blankGear.png");
 				puzzlePanel.add(tempLabel);
 
 				break;
 			}
 			case 1: {
-				JLabel tempLabel = createImageLabel("src/action/healthGear.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/healthGear.png");
 				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 2: {
-				JLabel tempLabel = createImageLabel("src/action/defenseGear.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/defenseGear.png");
 				puzzlePanel.add(tempLabel);
 				tempLabel.setVisible(true); 
 				break;
 			}
 			case 3: {
-				JLabel tempLabel = createImageLabel("src/action/attackGear.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/attackGear.png");
 				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 4: {
-				JLabel tempLabel = createImageLabel("src/action/speedGear.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/speedGear.png");
 				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 5: {
-				JLabel tempLabel = createImageLabel("src/action/healthGearHighlighted.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/healthGearHighlighted.png");
 				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 6: {
-				JLabel tempLabel = createImageLabel("src/action/defenseGearHighlighted.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/defenseGearHighlighted.png");
 				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 7: {
-				JLabel tempLabel = createImageLabel("src/action/attackGearHighlighted.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/attackGearHighlighted.png");
 				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 8: {
-				JLabel tempLabel = createImageLabel("src/action/speedGearHighlighted.png", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/speedGearHighlighted.png");
 				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			default: {
-				JLabel tempLabel = createImageLabel("src/action/factory.jpg", 90, 90);
+				JLabel tempLabel = createImageLabel("src/action/factory.jpg");
 				tempLabel.setVisible(true);
 				puzzlePanel.add(tempLabel);
 				break;
@@ -891,8 +905,8 @@ public class Display extends JPanel {
 		actionPanel.setBackground(Color.BLACK);
 		actionPanel.setVisible(false);
 
-		//gamePanel.add(actionPanel, BorderLayout.CENTER);
-		//mainFrame.add(gamePanel, BorderLayout.CENTER);
+		gamePanel.add(actionPanel, BorderLayout.CENTER);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
 	public static void updateActionScreen(){
 		
@@ -926,16 +940,39 @@ public class Display extends JPanel {
 		return imageLabel;
 
 	}
+	
+	public static JLabel createImageLabel(String filePath) {
+
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File(filePath));
+		} catch (IOException e1) {
+			System.out.println("Someone Fucked up");
+		}
+
+		JLabel imageLabel = new JLabel(new ImageIcon(image));
+
+		return imageLabel;
+
+	}
+	
+	
 
 	public static void changeMode() {
 		level += 1;
 		levelLabel.setText("Level: "+ level);
+		
 		if (actionActive) {
 			actionActive = false;
 			puzzleActive = true;
 			actionPanel.setVisible(false);
 			actionPanel.removeAll();
+			
+			puzzlePanel.setVisible(true);
+			
 			Puzzle.runPuzzle(10);
+			//gamePanel.revalidate();
+			//initPuzzleScreen();
 			gamePanel.revalidate();
 
 		}
@@ -944,7 +981,7 @@ public class Display extends JPanel {
 			actionActive = true;
 			puzzleActive = false;
 			puzzlePanel.setVisible(false);
-			//puzzlePanel.removeAll();
+			puzzlePanel.removeAll();
 			gamePanel.revalidate();
 		}
 		
