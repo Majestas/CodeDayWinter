@@ -4,7 +4,7 @@ import java.sql.SQLException;
 public class RobotRescue {
 
 	public static void main(String[] args) throws IOException, SQLException {
-		Database.saveForm();
+		Database.initDatabase();
 		Display.initDisplay();
 
 	}

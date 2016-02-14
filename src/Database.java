@@ -29,22 +29,16 @@ public class Database {
 	
 	public static void main(String[] args)
 	{
-		saveForm();
+		initDatabase();
 	}
 	
 	public static void initDatabase()
 	{
 		
-		
-		
-	}
-	
-	public static void saveForm()
-	{
-		
 		try 
 		{
 			conn = getConnection();
+			readPlatforms();
 		}
 		catch (SQLException e)
 		{
@@ -73,7 +67,30 @@ public class Database {
 		Database.player = player;
 	}
 	
-	public static void readPlayer() {
+	public static void readPlayer() throws SQLException {
+		
+	    Statement stmt = null;
+	    String query = "SELECT LengthX, WidthY "+
+	                   "FROM mydb.Platforms";
+	    try {
+	        stmt = conn.createStatement();
+	        ResultSet rs = stmt.executeQuery(query);
+	        int i = 0;
+	        while (rs.next()) {
+	            int length = rs.getInt("LengthX");
+	            int width = rs.getInt("WidthY");
+	            platforms[i][0] = (int) (Math.random() * (1000) + 1);
+	            platforms[i][1] = (int) (Math.random() * (600) + 100);
+	            platforms[i][2] = length;
+	            platforms[i][3] = width;
+	            i++;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        platforms = new int[4][4];
+	    } finally {
+	        if (stmt != null) { stmt.close(); }
+	    }
 		
 	}
 	
@@ -228,12 +245,8 @@ public class Database {
 	public static int[][] getPlatforms() {
 		return platforms;
 	}
-
-	public static void setPlatforms(int[][] platforms) {
-		Database.platforms = platforms;
-	}
 	
-	public static int[][] readPlatforms() throws SQLException
+	public static void readPlatforms() throws SQLException
 	{
 		
 	    Statement stmt = null;
@@ -252,11 +265,9 @@ public class Database {
 	            platforms[i][3] = width;
 	            i++;
 	        }
-	        return platforms;
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        platforms = new int[4][4];
-	        return platforms;
 	    } finally {
 	        if (stmt != null) { stmt.close(); }
 	    }

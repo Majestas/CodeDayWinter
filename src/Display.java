@@ -13,6 +13,8 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -38,6 +40,8 @@ public class Display extends JPanel {
 	private static boolean puzzleActive = true;
 	private static boolean actionActive = false;
 	private static int level = 1;
+	
+	public static BufferedImage bufferedImage;
 
 	// stats panel
 	private static JPanel statsPanel;
@@ -429,21 +433,31 @@ public class Display extends JPanel {
 
 	}
 
-	public static void initActionScreen() {
+	public static void initActionScreen() throws IOException {
 		
-		actionPanel = new JPanel();
+		
+		actionPanel = new JPanel(null);
 		actionPanel.setPreferredSize(new Dimension(1000, 720));
 		//actionPanel.setBackground(Color.GREEN);
-		JLabel tempLabel = createImageLabel("src/action/platform.png");
-		
-		actionPanel.add(tempLabel);
-		tempLabel.setLocation(800, 500);
 		
 		
-		gamePanel.add(actionPanel, BorderLayout.CENTER);
-		mainFrame.add(gamePanel, BorderLayout.CENTER);
-		//updateActionScreen();
-}
+		
+		
+		
+
+        	
+			JLabel temp1 = createImageLabel("src/action/heart.png");
+			temp1.setLocation(700, 200);
+			actionPanel.add(temp1);
+        	
+        	gamePanel.add(actionPanel, BorderLayout.CENTER);
+      		mainFrame.add(gamePanel, BorderLayout.CENTER);
+    }
+		
+		
+		
+		
+
 
 	public static void updateActionScreen(int[][] platformsArray2) {
 
@@ -454,23 +468,23 @@ public class Display extends JPanel {
 		tempPanel1.setSize(new Dimension(500,500));
 		actionPanel.add(tempPanel1,new Integer(2));
 		//actionPanel.add(tempJL);*/
-		int [][] platformsArray = new int[][] {{200, 500, 20, 30}, {100,300,20,30}};
+		int [][] platformsArray = new int[][] {{200, 500, 50, 30}, {100,300,50,30}};
 		
 		for (int i = 0; i < platformsArray.length; i ++){
 
 			
-				JLabel tempLabel = createImageLabel("src/action/platform.png",platformsArray[i][2], platformsArray[i][3] );
-				tempLabel.setLocation(platformsArray[i][0], platformsArray[i][1]);
-				actionPanel.add(tempLabel);
+				//JLabel tempLabel = createImageLabel("src/action/platform.png",platformsArray[i][2], platformsArray[i][3] );
+				//tempLabel.setLocation(500,600);
+				//actionPanel.add(tempLabel);
 			
-
 		}
+		
 		
 		puzzlePanel.removeAll();
 		puzzlePanel.revalidate();
 		
-		//gamePanel.add(actionPanel, BorderLayout.CENTER);
-		//mainFrame.add(gamePanel, BorderLayout.CENTER);
+		gamePanel.add(actionPanel, BorderLayout.CENTER);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
 
 	public static ArrayList<Integer> interpret2dArray(int[][] puzzleGrid) {
@@ -510,7 +524,7 @@ public class Display extends JPanel {
 		}
 
 		JLabel imageLabel = new JLabel(new ImageIcon(image));
-		imageLabel.setBounds(0, 0, 100, 100);
+		//imageLabel.setBounds(0, 0, 100, 100);
 
 		return imageLabel;
 
@@ -556,4 +570,6 @@ public class Display extends JPanel {
 		}
 
 	}
+	
+	
 }
