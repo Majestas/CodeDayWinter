@@ -610,23 +610,26 @@ public class Display extends JPanel {
 		dataPanel = new JPanel(new GridBagLayout());
 		dataPanel.setVisible(true);
 		dataPanel.setPreferredSize(new Dimension(1000, 720));
-		dataPanel.setBackground(Color.RED);
+		dataPanel.setBackground(Color.WHITE);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridwidth = 1;
 		c.gridheight = 1;
 		c.weightx = 1;
 		c.ipadx = 10;
-		c.ipady = 50;
+		c.ipady = 25;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		int fontsize = 24;
+		int fontsize = 22;
+		gamePanel.add(dataPanel, BorderLayout.CENTER);
+		
+		/*
 	    JLabel healthStatLabel = new JLabel("Health: "+Robot.getHealth());
 		healthStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
 		c.gridx = 0;
 		c.gridy = 1;
 		dataPanel.add(healthStatLabel, c);
 		
-		gamePanel.add(dataPanel, BorderLayout.CENTER);
+		
 		dataPanel.revalidate();
 		
 		JLabel attackStatLabel = new JLabel("Attack: "+Robot.getAttack());
@@ -647,11 +650,13 @@ public class Display extends JPanel {
 		c.gridy = 4;
 		dataPanel.add(speedStatLabel, c);
 		
+		
 		JLabel killsLabel = new JLabel("Attack: "+Robot.getKills());
 		killsLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
 		c.gridx = 0;
 		c.gridy = 5;
 		dataPanel.add(killsLabel, c);
+		*/
 		
 		JLabel matchesLabel = new JLabel("Total Matches Made: "+Robot.getTotalMatches());
 		matchesLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
@@ -707,8 +712,8 @@ public class Display extends JPanel {
 		c.gridy = 14;
 		dataPanel.add(shotsHitLabel, c);
 		
-		JLabel shotsTakenLabel = new JLabel("Shots Taken: "+Robot.getShotsFired());
-		shotsFiredLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		JLabel shotsTakenLabel = new JLabel("Shots Taken: "+Robot.getShotsTaken());
+		shotsTakenLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
 		c.gridx = 0;
 		c.gridy = 15;
 		dataPanel.add(shotsTakenLabel, c);
