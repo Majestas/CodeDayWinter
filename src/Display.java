@@ -433,14 +433,19 @@ public class Display extends JPanel {
 		
 		actionPanel = new JPanel();
 		actionPanel.setPreferredSize(new Dimension(1000, 720));
-		actionPanel.setBackground(Color.GREEN);
-
+		//actionPanel.setBackground(Color.GREEN);
+		JLabel tempLabel = createImageLabel("src/action/platform.png");
+		
+		actionPanel.add(tempLabel);
+		tempLabel.setLocation(800, 500);
+		
+		
 		gamePanel.add(actionPanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 		//updateActionScreen();
 }
 
-	public static void updateActionScreen(int[][] platformsArray) {
+	public static void updateActionScreen(int[][] platformsArray2) {
 
 		/*JLayeredPane tempPanel1 = new JLayeredPane();
 		JLabel tempJL = createImageLabel("src/action/factory.jpg");
@@ -449,13 +454,21 @@ public class Display extends JPanel {
 		tempPanel1.setSize(new Dimension(500,500));
 		actionPanel.add(tempPanel1,new Integer(2));
 		//actionPanel.add(tempJL);*/
+		int [][] platformsArray = new int[][] {{200, 500, 20, 30}, {100,300,20,30}};
 		
 		for (int i = 0; i < platformsArray.length; i ++){
-			for (int k = 0; k < platformsArray[i].length; k++){
-				JLabel tempLabel = createImageLabel("src/action/platform.png");
-				tempLabel.setLocation(platformsArray[i][0], platformsArray[i][0];
-			}
+			
+				JLabel tempLabel = createImageLabel("src/action/platform.png",platformsArray[i][2], platformsArray[i][3] );
+				tempLabel.setLocation(platformsArray[i][0], platformsArray[i][1]);
+				actionPanel.add(tempLabel);
+			
 		}
+		
+		puzzlePanel.removeAll();
+		puzzlePanel.revalidate();
+		
+		//gamePanel.add(actionPanel, BorderLayout.CENTER);
+		//mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
 
 	public static ArrayList<Integer> interpret2dArray(int[][] puzzleGrid) {
@@ -527,7 +540,7 @@ public class Display extends JPanel {
 			gamePanel.revalidate();
 			
 			actionPanel.setVisible(true);
-			updateActionScreen();
+			//updateActionScreen();
 			gamePanel.revalidate();
 			
 
