@@ -81,6 +81,7 @@ public class Display extends JPanel {
 		initGamePanel();
 		initPuzzleScreen();
 		initActionScreen();
+		updateActionScreen();
 		// updatePuzzleScreen();
 		Puzzle.runPuzzle(5+(level*5));
 		// changeMode();
@@ -439,7 +440,9 @@ public class Display extends JPanel {
 			
 		}
 		
-		
+		JLabel temp17 = createImageLabel("src/action/platform.png");
+		temp17.setLocation(500, 700);
+		actionPanel.add(temp17);
 
 		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
@@ -454,7 +457,7 @@ public class Display extends JPanel {
 		
 		
 		
-		actionPanel = new JPanel(new BorderLayout());
+		actionPanel = new JPanel(null);
 		actionPanel.setPreferredSize(new Dimension(1000, 720));
 		actionPanel.setBackground(Color.BLUE);
 
@@ -463,7 +466,7 @@ public class Display extends JPanel {
 		gamePanel.add(actionPanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
       		
-		updateActionScreen();
+		//updateActionScreen();
     }
 		
 		
@@ -493,13 +496,14 @@ public class Display extends JPanel {
 		puzzlePanel.removeAll();
 		actionPanel.revalidate();
 		
-		JLabel temp7 = createImageLabel("src/action/platform.png");
-		temp7.setLocation(500, 200);
-		actionPanel.add(temp7);
 		
-		JLabel temp9 = new JLabel("src/action/");
+		
+		JLabel temp9 = createImageLabel("src/action/platform.png");
+		//temp9.setLocation(500, 400);
 		actionPanel.add(temp9);
 		
+		
+		actionPanel.revalidate();
 		gamePanel.add(actionPanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
