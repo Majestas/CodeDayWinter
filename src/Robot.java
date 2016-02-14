@@ -24,6 +24,7 @@ public class Robot
 	private static int y = 0;
 	private static int height = 22;
 	private static int width = 15;
+	private static int[][] plats = Database.getPlatforms();
 	
 	
 	public Robot(int startx, int starty)
@@ -108,7 +109,7 @@ public class Robot
 		int ximage = Robot.x + Robot.speedX;
 		int yimage = Robot.y + 0;
 		
-		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
+		//int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
 		
 		int minspeed;
 		if(Robot.speedX > 0)
@@ -117,7 +118,7 @@ public class Robot
 			minspeed = -999999;
 		int diff;
 		
-		for(int[] plat : plats)
+		for(int[] plat : Robot.plats)
 		{
 			if(ximage > plat[0] && ximage < plat[0] + plat[2])
 			{
@@ -171,7 +172,7 @@ public class Robot
 		int ximage = Robot.x + 0;
 		int yimage = Robot.y + Robot.speedY;
 		
-		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
+		//int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
 		
 		int minspeed;
 		if(Robot.speedY > 0)
@@ -180,7 +181,7 @@ public class Robot
 			minspeed = -999999;
 		int diff;
 		
-		for(int[] plat : plats)
+		for(int[] plat : Robot.plats)
 		{
 			if(yimage > plat[1] && yimage < plat[1] + plat[3])
 			{
@@ -228,9 +229,9 @@ public class Robot
 	{
 		boolean response = false;
 		
-		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
+		//int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
 		
-		for(int[] plat : plats)
+		for(int[] plat : Robot.plats)
 		{
 			if(Robot.x > plat[0] && Robot.x < plat[0] + plat[2])
 			{
@@ -400,6 +401,14 @@ public class Robot
 
 	public static void setRedTilesCleared(int redTilesCleared) {
 		Robot.redTilesCleared = redTilesCleared;
+	}
+	
+	public static void setPlats(int[][] plats){
+		Robot.plats = plats;
+	}
+	
+	public static int[][] getPlats(){
+		return Robot.plats;
 	}
 
 }

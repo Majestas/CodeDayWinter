@@ -457,11 +457,13 @@ public class Display extends JPanel {
 		int [][] platformsArray = new int[][] {{200, 500, 20, 30}, {100,300,20,30}};
 		
 		for (int i = 0; i < platformsArray.length; i ++){
+
 			
 				JLabel tempLabel = createImageLabel("src/action/platform.png",platformsArray[i][2], platformsArray[i][3] );
 				tempLabel.setLocation(platformsArray[i][0], platformsArray[i][1]);
 				actionPanel.add(tempLabel);
 			
+
 		}
 		
 		puzzlePanel.removeAll();
@@ -540,7 +542,11 @@ public class Display extends JPanel {
 			gamePanel.revalidate();
 			
 			actionPanel.setVisible(true);
+
 			//updateActionScreen();
+
+			updateActionScreen(Robot.getPlats());
+
 			gamePanel.revalidate();
 			
 
