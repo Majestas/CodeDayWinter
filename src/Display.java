@@ -261,7 +261,7 @@ public class Display extends JPanel {
 
 				if (actionActive) {
 
-					Action.move()
+					Action.move(e);
 				} 
 				
 				else if (puzzleActive) {
