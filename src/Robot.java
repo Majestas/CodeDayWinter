@@ -19,6 +19,8 @@ public class Robot
 	private static int bestCascade = 0; //in color matching thing
 	private static int x = 0;
 	private static int y = 0;
+	private static int height = 22;
+	private static int width = 15;
 	
 	
 	public Robot(int startx, int starty)
@@ -193,9 +195,42 @@ public class Robot
 	{
 		boolean response = true;
 		
-		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,w}
+		int ximage = Robot.x + Robot.speedX;
+		int yimage = Robot.y + 0;
+		
+		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
+		
+		for(int[] plat : plats)
+		{
+			if(ximage > plat[0] && ximage < plat[0] + plat[3])
+			{
+				
+			}
+		}
+		
 		
 		return response;
+	}
+	
+	public static boolean collideY()
+	{
+		return true;
+	}
+
+	public static int getHeight() {
+		return height;
+	}
+
+	public static void setHeight(int height) {
+		Robot.height = height;
+	}
+
+	public static int getWidth() {
+		return width;
+	}
+
+	public static void setWidth(int width) {
+		Robot.width = width;
 	}
 
 }
