@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -23,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.sun.glass.events.KeyEvent;
+import com.sun.prism.Image;
 
 public class Display {
 
@@ -47,6 +49,7 @@ public class Display {
 	
 	//Puzzle class
 	private static JPanel puzzlePanel;
+	private static JPanel puzzleBackgroundPanel;
 	
 	//actionPanel
 	
@@ -253,18 +256,27 @@ public class Display {
 	public static void initPuzzleScreen(){
 		puzzlePanel = new JPanel();
 		puzzlePanel.setPreferredSize(new Dimension(1000,720));
-		puzzlePanel.setBackground(Color.RED);
+		
+		
+		//puzzlePanel.setBackground(Color.RED);
 		
 		
 
 		
 		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
+		
 		mainFrame.add(gamePanel, BorderLayout.CENTER);		
 	}
 	
 	public static void updatePuzzleScreen(int [][] puzzleGrid, int boxX, int boxY){
 		
 		ArrayList<Integer> gearArray = interpret2dArray(puzzleGrid);
+		
+		
+		puzzleBackgroundPanel = new JPanel();
+		puzzleBackgroundPanel.setPreferredSize(new Dimension(1000,720));
+		puzzleBackgroundPanel.add(createImageLabel("src/action/factory.jpg",1000,720));
+		puzzlePanel.add(puzzleBackgroundPanel, BorderLayout.CENTER);
 		
 		
 		puzzlePanel.removeAll();
