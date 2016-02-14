@@ -514,6 +514,7 @@ public class Display extends JPanel {
 
 	}
 
+	
 	public static JLabel createImageLabel(String filePath) {
 
 		BufferedImage image = null;
@@ -523,12 +524,16 @@ public class Display extends JPanel {
 			System.out.println("Someone Fucked up");
 		}
 
-		JLabel imageLabel = new JLabel(new ImageIcon(image));
+		JLabel imageLabel = 
+				new JLabel(
+						new ImageIcon(
+								image));
 		//imageLabel.setBounds(0, 0, 100, 100);
 
 		return imageLabel;
 
 	}
+	
 
 	public static void changeMode() {
 		level += 1;
