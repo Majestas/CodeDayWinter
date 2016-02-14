@@ -5,6 +5,9 @@ public class Robot
 	private static int attack = 1;
 	private static int defense = 0;
 	private static int speed = 1;
+	private static int maxSpeed = 3 * speed;
+	private static int speedX = 0;
+	private static int speedY = 0;
 	private static int kills = 0;
 	private static int matches = 0;
 	private static int tilesCleared = 0;
@@ -142,6 +145,22 @@ public class Robot
 
 	public static void setY(int y) {
 		Robot.y = y;
+	}
+
+	public static int getSpeedX() {
+		return speedX;
+	}
+
+	public static void setSpeedX(int speedX) {
+		Robot.speedX = speedX;
+	}
+
+	public static int getSpeedY() {
+		return speedY;
+	}
+
+	public static void setSpeedY(int speedY) {
+		Robot.speedY = speedY;
 	}
 
 }

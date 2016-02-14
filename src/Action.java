@@ -12,22 +12,22 @@ public class Action {
 		{
 			case(KeyEvent.VK_UP):
 			{
-				Robot.setY(Robot.getY() - Robot.getSpeed());
+				Robot.setSpeedY(Robot.getSpeedY() - Robot.getSpeed());
 				break;
 			}
 			case(KeyEvent.VK_DOWN):
 			{
-				Robot.setY(Robot.getY() + Robot.getSpeed());
+				Robot.setSpeedY(Robot.getSpeedY() + Robot.getSpeed());
 				break;
 			}
 			case(KeyEvent.VK_LEFT):
 			{
-				Robot.setX(Robot.getX() - Robot.getSpeed());
+				Robot.setSpeedX(Robot.getSpeedX() - Robot.getSpeed());
 				break;
 			}
 			case(KeyEvent.VK_RIGHT):
 			{
-				Robot.setX(Robot.getX() + Robot.getSpeed());
+				Robot.setSpeedX(Robot.getSpeedX() + Robot.getSpeed());
 				break;
 			}
 			case(KeyEvent.VK_W):
