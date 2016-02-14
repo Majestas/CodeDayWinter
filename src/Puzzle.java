@@ -25,7 +25,6 @@ public class Puzzle {
 
 	// Puzzle methods
 	private static void checkMatches() {
-		System.out.println("Starting checking!!!");
 		boolean deletedTiles = false;
 		int[][] match = new int[][] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -252,12 +251,6 @@ public class Puzzle {
 		}
 		for(int i=0;i<7;i++) {
 			for(int k=0;k<10;k++) {
-				System.out.print(match[i][k]);
-			}
-			System.out.println();
-		}
-		for(int i=0;i<7;i++) {
-			for(int k=0;k<10;k++) {
 				if(match[i][k]==1) {
 					tilesCleared++;
 					puzzleGrid[i][k]=0;
@@ -385,8 +378,7 @@ public class Puzzle {
 			}
 			break;
 		}
-		System.out.println(boxX + "\n" + boxY);
-		//displayGrid();
+		displayGrid();
 	}
 
 	public static void checkMoves() {
@@ -397,7 +389,6 @@ public class Puzzle {
 
 	public static void displayGrid() {
 		
-		System.out.println("updating grid");
 		for(int i = 0; i < 7; i++)
 			for(int k =0; k < 10; k++)
 				highlightedGrid[i][k] = puzzleGrid[i][k];
