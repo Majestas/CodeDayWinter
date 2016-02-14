@@ -235,7 +235,10 @@ public class Display extends JPanel {
 			}
 		});
 		StatsMenu.add(statsOption);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> origin/master
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.setVisible(true);
 	}
@@ -605,6 +608,7 @@ public class Display extends JPanel {
 
 	}
 
+	
 	public static JLabel createImageLabel(String filePath) {
 
 		BufferedImage image = null;
@@ -614,12 +618,16 @@ public class Display extends JPanel {
 			System.out.println("Someone Fucked up");
 		}
 
-		JLabel imageLabel = new JLabel(new ImageIcon(image));
+		JLabel imageLabel = 
+				new JLabel(
+						new ImageIcon(
+								image));
 		//imageLabel.setBounds(0, 0, 100, 100);
 
 		return imageLabel;
 
 	}
+	
 
 	public static void changeMode() {
 		level += 1;
@@ -639,6 +647,7 @@ public class Display extends JPanel {
 			Puzzle.runPuzzle(5+(5*level));
 			// gamePanel.revalidate();
 			// initPuzzleScreen();
+			gamePanel.add(dataPanel);
 			gamePanel.revalidate();
 
 		} else if (puzzleActive) {
@@ -673,25 +682,30 @@ public class Display extends JPanel {
 		puzzlePanel.removeAll();
 		moveLabel.setVisible(false);
 		moveImageLabel.setVisible(false);
-		dataPanel.setVisible(true);
 		dataPanel = new JPanel(new GridBagLayout());
+		dataPanel.setVisible(true);
 		dataPanel.setPreferredSize(new Dimension(1000, 720));
-		dataPanel.setBackground(Color.RED);
+		dataPanel.setBackground(Color.WHITE);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridwidth = 1;
 		c.gridheight = 1;
 		c.weightx = 1;
 		c.ipadx = 10;
-		c.ipady = 50;
+		c.ipady = 25;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		int fontsize = 24;
+		int fontsize = 22;
+		gamePanel.add(dataPanel, BorderLayout.CENTER);
 		
+		/*
 	    JLabel healthStatLabel = new JLabel("Health: "+Robot.getHealth());
 		healthStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
 		c.gridx = 0;
 		c.gridy = 1;
 		dataPanel.add(healthStatLabel, c);
+		
+		
+		dataPanel.revalidate();
 		
 		JLabel attackStatLabel = new JLabel("Attack: "+Robot.getAttack());
 		attackStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
@@ -711,11 +725,13 @@ public class Display extends JPanel {
 		c.gridy = 4;
 		dataPanel.add(speedStatLabel, c);
 		
+		
 		JLabel killsLabel = new JLabel("Attack: "+Robot.getKills());
 		killsLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
 		c.gridx = 0;
 		c.gridy = 5;
 		dataPanel.add(killsLabel, c);
+		*/
 		
 		JLabel matchesLabel = new JLabel("Total Matches Made: "+Robot.getTotalMatches());
 		matchesLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
@@ -771,12 +787,13 @@ public class Display extends JPanel {
 		c.gridy = 14;
 		dataPanel.add(shotsHitLabel, c);
 		
-		JLabel shotsTakenLabel = new JLabel("Shots Taken: "+Robot.getShotsFired());
-		shotsFiredLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
+		JLabel shotsTakenLabel = new JLabel("Shots Taken: "+Robot.getShotsTaken());
+		shotsTakenLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
 		c.gridx = 0;
 		c.gridy = 15;
 		dataPanel.add(shotsTakenLabel, c);
 		
+		dataPanel.revalidate();
 		gamePanel.revalidate();
 	}
 	
