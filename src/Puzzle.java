@@ -1,3 +1,4 @@
+
 public class Puzzle {
 	// Variables for puzzle
 	private static int[][] puzzleGrid = new int[][] {
