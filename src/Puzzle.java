@@ -616,7 +616,7 @@ public class Puzzle {
 	}
 
 	public static void checkMoves() {
-		if (moves == maxMoves) {
+		if (moves >= maxMoves) {
 			Robot.setTilesCleared(Robot.getTilesCleared()+tilesCleared);
 			Robot.setRedTilesCleared(Robot.getRedTilesCleared() + redCleared);
 			Robot.setBlueTilesCleared(Robot.getBlueTilesCleared() + blueCleared);

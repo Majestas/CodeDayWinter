@@ -12,7 +12,7 @@ public class Action {
 		{
 			case(KeyEvent.VK_UP):
 			{
-				Robot.setSpeedY(Robot.getSpeedY() - Robot.getSpeed());
+				Robot.setSpeedY(Robot.getSpeedY() - 3 * Robot.getSpeed());
 				break;
 			}
 			case(KeyEvent.VK_DOWN):
