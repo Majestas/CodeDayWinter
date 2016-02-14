@@ -32,8 +32,8 @@ public class Display extends JPanel {
 	// main stuff
 	private static JFrame mainFrame;
 	private static JMenuBar menuBar;
-	private static boolean puzzleActive = false;
-	private static boolean actionActive = true;
+	private static boolean puzzleActive = true;
+	private static boolean actionActive = false;
 
 	// stats panel
 	private static JPanel statsPanel;
@@ -308,7 +308,6 @@ public class Display extends JPanel {
 					}
 				}
 
-				System.out.println(e.getKeyChar());
 			}
 
 			@Override

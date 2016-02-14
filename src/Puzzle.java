@@ -337,27 +337,47 @@ public class Puzzle {
 	public static void moveBox(int direction) {
 
 		switch (direction) {
-		case 1: // right
+		case 1: {// right
 			if (boxX < 8) {
+				highlightedGrid[boxY][boxX] -= 4;
+				highlightedGrid[boxY + 1][boxX] -= 4;
+				highlightedGrid[boxY][boxX + 1] -= 4;
+				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxX++;
 			}
 			break;
-		case 2: // Left
+		}
+		case 2:{ // Left
 			if (boxX > 0) {
+				highlightedGrid[boxY][boxX] -= 4;
+				highlightedGrid[boxY + 1][boxX] -= 4;
+				highlightedGrid[boxY][boxX + 1] -= 4;
+				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxX--;
 			}
 			break;
-		case 3: // Up
+		}
+		case 3:{ // Up
 			if (boxY > 0) {
+				highlightedGrid[boxY][boxX] -= 4;
+				highlightedGrid[boxY + 1][boxX] -= 4;
+				highlightedGrid[boxY][boxX + 1] -= 4;
+				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxY--;
 			}
 			break;
+		}
 		case 4: // Down
-			if (boxY < 6) {
+			if (boxY < 5) {
+				highlightedGrid[boxY][boxX] -= 4;
+				highlightedGrid[boxY + 1][boxX] -= 4;
+				highlightedGrid[boxY][boxX + 1] -= 4;
+				highlightedGrid[boxY + 1][boxX + 1] -= 4;
 				boxY++;
 			}
 			break;
 		}
+		System.out.println(boxX + "\n" + boxY);
 		displayGrid();
 	}
 
@@ -368,6 +388,8 @@ public class Puzzle {
 	}
 
 	public static void displayGrid() {
+		
+		System.out.println("updating grid");
 		highlightedGrid = puzzleGrid;
 		if (highlightedGrid[boxY][boxX] > 4) {
 
