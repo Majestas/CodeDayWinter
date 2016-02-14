@@ -258,7 +258,7 @@ public class Display {
 		puzzlePanel.setPreferredSize(new Dimension(1000,720));
 		
 		
-		//puzzlePanel.setBackground(Color.RED);
+		puzzlePanel.setBackground(Color.BLACK);
 		
 		
 
@@ -273,10 +273,11 @@ public class Display {
 		ArrayList<Integer> gearArray = interpret2dArray(puzzleGrid);
 		
 		
-		puzzleBackgroundPanel = new JPanel();
+		/*puzzleBackgroundPanel = new JPanel();
 		puzzleBackgroundPanel.setPreferredSize(new Dimension(1000,720));
 		puzzleBackgroundPanel.add(createImageLabel("src/action/factory.jpg",1000,720));
 		puzzlePanel.add(puzzleBackgroundPanel, BorderLayout.CENTER);
+		puzzlePanel.setComponentZOrder(puzzleBackgroundPanel, 0);*/
 		
 		
 		puzzlePanel.removeAll();
@@ -311,12 +312,12 @@ public class Display {
 				break;
 			}	
 			case 5: {
-				JLabel tempLabel = createImageLabel("src/action/healthGearHighlighted",90,90);
+				JLabel tempLabel = createImageLabel("src/action/healthGearHighlighted.png",90,90);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
 			case 6: {
-				JLabel tempLabel = createImageLabel("src/action/defenseGearHighlighted",90,90);
+				JLabel tempLabel = createImageLabel("src/action/defenseGearHighlighted.png",90,90);
 				puzzlePanel.add(tempLabel);
 				break;
 			}
@@ -330,10 +331,16 @@ public class Display {
 				puzzlePanel.add(tempLabel);
 				break;
 			}
+			default: {
+				JLabel tempLabel = createImageLabel("src/action/factory.jpg",90,90);
+				puzzlePanel.add(tempLabel);
+				break;
+			}
 			}
 		}
 		
 		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
+		
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 		
 		
@@ -354,10 +361,7 @@ public class Display {
 	}
 	
 	
-	
-	
 
-	
 	public static JLabel createImageLabel(String filePath, int width, int height){
 		
 		BufferedImage image = null;

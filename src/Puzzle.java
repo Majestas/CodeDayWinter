@@ -310,36 +310,18 @@ public class Puzzle {
 				puzzleGrid[i][j] = (int)(Math.random()*4)+1;
 			}
 		}
-		checkMatches();
+		displayGrid();
 	}
 	
 	private static void dropTiles() {
-		boolean zeros = true;
-		do {
-			for(int i=6;i>0;i--) {
-				for(int j=0;j<10;j++) {
-					if(puzzleGrid[i][j]==0) {
-						puzzleGrid[i][j] = puzzleGrid[i-1][j];
-						puzzleGrid[i-1][j] = 0;
-					}
+		for(int i=0;i<7;i++) {
+			for(int k=0;k<10;k++) {
+				if(puzzleGrid[i][k]==0) {
+					puzzleGrid[i][k] = (int)(Math.random()*4)+1;
 				}
 			}
-			for(int j=0;j<10;j++) {
-				if(puzzleGrid[0][j] == 0) {
-					puzzleGrid[0][j] = (int)(Math.random()*4)+1;
-				}
-			}
-			zeros = false;
-			for(int i =0; i<7;i++) {
-				for(int j=0;j<10;j++) {
-					if(puzzleGrid[i][j]==0) {
-						zeros = true;
-					}
-				}
-			}
-			displayGrid();
-		} while(zeros);
-		checkMoves();
+		}
+		checkMatches();
 	}
 	public static void runPuzzle(int move) {
 		moves = 0;
@@ -414,10 +396,16 @@ public class Puzzle {
 	}
 	public static void displayGrid() {
 		highlightedGrid = puzzleGrid;
-		highlightedGrid[boxY][boxX]+=4;
-		highlightedGrid[boxY+1][boxX]+=4;
-		highlightedGrid[boxY][boxX+1]+=4;
-		highlightedGrid[boxY+1][boxX+1]+=4;
+		if (highlightedGrid[boxY][boxX] > 4){
+			
+		}
+		else{
+			highlightedGrid[boxY][boxX]+=4;
+			highlightedGrid[boxY+1][boxX]+=4;
+			highlightedGrid[boxY][boxX+1]+=4;
+			highlightedGrid[boxY+1][boxX+1] +=4;
+		}
+	
 		Display.updatePuzzleScreen(highlightedGrid);
 	}
 }
