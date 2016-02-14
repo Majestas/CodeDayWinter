@@ -69,7 +69,7 @@ public class Display extends JPanel {
 		initPuzzleScreen();
 		initActionScreen();
 		// updatePuzzleScreen();
-		Puzzle.runPuzzle(10);
+		Puzzle.runPuzzle(5+(level*5));
 		// changeMode();
 	}
 
@@ -498,9 +498,8 @@ public class Display extends JPanel {
 			puzzleActive = true;
 			actionPanel.setVisible(false);
 			actionPanel.removeAll();
-
+			moveLabel.setVisible(true);
 			puzzlePanel.setVisible(true);
-
 			Puzzle.runPuzzle(10);
 			// gamePanel.revalidate();
 			// initPuzzleScreen();
@@ -512,6 +511,7 @@ public class Display extends JPanel {
 			puzzlePanel.setVisible(false);
 			puzzlePanel.removeAll();
 			gamePanel.revalidate();
+			moveLabel.setVisible(false);
 		}
 
 	}

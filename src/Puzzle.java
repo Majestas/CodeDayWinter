@@ -348,8 +348,8 @@ public class Puzzle {
 		displayGrid();
 		moves++;
 		Display.moveLabel.setText("Moves: "+moves+"/"+maxMoves);
-		checkMoves();
 		checkMatches();
+		checkMoves();
 	}
 
 	public static void moveBox(int direction) {
