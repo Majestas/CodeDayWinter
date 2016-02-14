@@ -46,6 +46,7 @@ public class Display extends JPanel {
 	private static JLabel speedLabel;
 	private static JLabel defenseLabel;
 	private static JLabel attackLabel;
+	public static JLabel moveLabel;
 	// game panle
 	private static JPanel gamePanel;
 	private static JPanel actionPanel;
@@ -220,6 +221,19 @@ public class Display extends JPanel {
 		c.gridx = 0;
 		c.gridy = 5;
 		statsPanel.add(speedImageLabel, c);
+		//
+		
+		//
+		moveLabel = new JLabel("Moves:", JLabel.LEADING);
+		moveLabel.setFont(new Font("futura", Font.PLAIN, fontSize));
+		c.gridx = 1;
+		c.gridy = 6;
+		statsPanel.add(moveLabel, c);
+
+		JLabel moveImageLabel = createImageLabel("src/stats/moves.png", statsImageSize, statsImageSize);
+		c.gridx = 0;
+		c.gridy = 6;
+		statsPanel.add(moveImageLabel, c);
 		//
 
 	}

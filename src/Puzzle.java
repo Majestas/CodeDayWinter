@@ -6,10 +6,6 @@ public class Puzzle {
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
 	private static int[][] highlightedGrid = new int[7][10];
-	private static int healthAdded = 0;
-	private static int defenseAdded = 0;
-	private static int attackAdded = 0;
-	private static int speedAdded = 0;
 	private static int moves = 0;
 	private static int maxMoves = 0;
 	private static int boxX = 0;
@@ -22,10 +18,12 @@ public class Puzzle {
 	private static int yellowCleared = 0;
 	private static int greenCleared = 0;
 	private static int blueCleared = 0;
+	private static int bestCascade = 0;
 
 	// Puzzle methods
 	private static void checkMatches() {
 		boolean deletedTiles = false;
+		int cascade = 0;
 		int[][] match = new int[][] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -42,20 +40,20 @@ public class Puzzle {
 						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 5])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
-						healthAdded += 6;
 						redCleared += 6;
+						Robot.setHealth(Robot.getHealth() + 6);
 						break;
 					case 2:
-						defenseAdded += 6;
 						greenCleared += 6;
+						Robot.setDefense(Robot.getDefense() + 6);
 						break;
 					case 3:
-						attackAdded += 6;
 						yellowCleared += 6;
+						Robot.setAttack(Robot.getAttack() + 6);
 						break;
 					case 4:
-						speedAdded += 6;
 						blueCleared += 6;
+						Robot.setSpeed(Robot.getSpeed() + 6);
 						break;
 					default:
 						break;
@@ -67,6 +65,7 @@ public class Puzzle {
 					match[i][j + 4] = 1;
 					match[i][j + 5] = 1;
 					matchesMade++;
+					cascade++;
 					deletedTiles = true;
 				}
 			}
@@ -80,20 +79,20 @@ public class Puzzle {
 						&& (puzzleGrid[i][j] == puzzleGrid[i + 5][j])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
-						healthAdded += 6;
 						redCleared += 6;
+						Robot.setHealth(Robot.getHealth() + 6);
 						break;
 					case 2:
-						defenseAdded += 6;
 						greenCleared += 6;
+						Robot.setDefense(Robot.getDefense() + 6);
 						break;
 					case 3:
-						attackAdded += 6;
 						yellowCleared += 6;
+						Robot.setAttack(Robot.getAttack() + 6);
 						break;
 					case 4:
-						speedAdded += 6;
 						blueCleared += 6;
+						Robot.setSpeed(Robot.getSpeed() + 6);
 						break;
 					default:
 						break;
@@ -105,6 +104,7 @@ public class Puzzle {
 					match[i + 4][j] = 1;
 					match[i + 5][j] = 1;
 					matchesMade++;
+					cascade++;
 					deletedTiles = true;
 				}
 			}
@@ -117,20 +117,20 @@ public class Puzzle {
 						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 4])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
-						healthAdded += 5;
 						redCleared += 5;
+						Robot.setHealth(Robot.getHealth() + 5);
 						break;
 					case 2:
-						defenseAdded += 5;
 						greenCleared += 5;
+						Robot.setDefense(Robot.getDefense() + 5);
 						break;
 					case 3:
-						attackAdded += 5;
 						yellowCleared += 5;
+						Robot.setAttack(Robot.getAttack() + 5);
 						break;
 					case 4:
-						speedAdded += 5;
 						blueCleared += 5;
+						Robot.setSpeed(Robot.getSpeed() + 5);
 						break;
 					default:
 						break;
@@ -141,6 +141,7 @@ public class Puzzle {
 					match[i][j + 3] = 1;
 					match[i][j + 4] = 1;
 					matchesMade++;
+					cascade++;
 					deletedTiles = true;
 				}
 			}
@@ -153,20 +154,20 @@ public class Puzzle {
 						&& (puzzleGrid[i][j] == puzzleGrid[i + 4][j])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
-						healthAdded += 5;
 						redCleared += 5;
+						Robot.setHealth(Robot.getHealth() + 5);
 						break;
 					case 2:
-						defenseAdded += 5;
 						greenCleared += 5;
+						Robot.setDefense(Robot.getDefense() + 5);
 						break;
 					case 3:
-						attackAdded += 5;
 						yellowCleared += 5;
+						Robot.setAttack(Robot.getAttack() + 5);
 						break;
 					case 4:
-						speedAdded += 5;
 						blueCleared += 5;
+						Robot.setSpeed(Robot.getSpeed() + 5);
 						break;
 					default:
 						break;
@@ -177,6 +178,7 @@ public class Puzzle {
 					match[i + 3][j] = 1;
 					match[i + 4][j] = 1;
 					matchesMade++;
+					cascade++;
 					deletedTiles = true;
 				}
 			}
@@ -188,20 +190,20 @@ public class Puzzle {
 						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 3])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
-						healthAdded += 4;
 						redCleared += 4;
+						Robot.setHealth(Robot.getHealth() + 4);
 						break;
 					case 2:
-						defenseAdded += 4;
 						greenCleared += 4;
+						Robot.setDefense(Robot.getDefense() + 4);
 						break;
 					case 3:
-						attackAdded += 4;
 						yellowCleared += 4;
+						Robot.setAttack(Robot.getAttack() + 4);
 						break;
 					case 4:
-						speedAdded += 4;
 						blueCleared += 4;
+						Robot.setSpeed(Robot.getSpeed() + 4);
 						break;
 					default:
 						break;
@@ -211,6 +213,7 @@ public class Puzzle {
 					match[i][j + 2] = 1;
 					match[i][j + 3] = 1;
 					matchesMade++;
+					cascade++;
 					deletedTiles = true;
 				}
 			}
@@ -222,20 +225,20 @@ public class Puzzle {
 						&& (puzzleGrid[i][j] == puzzleGrid[i + 3][j])) {
 					switch (puzzleGrid[i][j]) {
 					case 1:
-						healthAdded += 4;
 						redCleared += 4;
+						Robot.setHealth(Robot.getHealth() + 4);
 						break;
 					case 2:
-						defenseAdded += 4;
 						greenCleared += 4;
+						Robot.setDefense(Robot.getDefense() + 4);
 						break;
 					case 3:
-						attackAdded += 4;
 						yellowCleared += 4;
+						Robot.setAttack(Robot.getAttack() + 4);
 						break;
 					case 4:
-						speedAdded += 4;
-						blueCleared +=4;
+						blueCleared += 4;
+						Robot.setSpeed(Robot.getSpeed() + 4);
 						break;
 					default:
 						break;
@@ -245,20 +248,28 @@ public class Puzzle {
 					match[i + 2][j] = 1;
 					match[i + 3][j] = 1;
 					matchesMade++;
+					cascade++;
 					deletedTiles = true;
 				}
 			}
 		}
-		for(int i=0;i<7;i++) {
-			for(int k=0;k<10;k++) {
-				if(match[i][k]==1) {
+		for (int i = 0; i < 7; i++) {
+			for (int k = 0; k < 10; k++) {
+				if (match[i][k] == 1) {
 					tilesCleared++;
-					puzzleGrid[i][k]=0;
+					puzzleGrid[i][k] = 0;
 					deletedTiles = true;
 				}
 			}
 		}
-		if(deletedTiles) {
+		if (cascade > bestCascade) {
+			bestCascade = cascade;
+		}
+		if (deletedTiles) {
+			Display.healthLabel.setText("Health: "+Robot.getHealth());
+			Display.attackLabel.setText("Attack: "+Robot.getAttack());
+			Display.defenseLabel.setText("Defense: "+Robot.getDefense());
+			Display.speedLabel.setText("Speed: "+Robot.getSpeed());
 			displayGrid();
 			dropTiles();
 		}
@@ -291,6 +302,7 @@ public class Puzzle {
 		createGrid();
 		displayGrid();
 	}
+
 	public static void rotate(int direction) {
 		int temp;
 		switch (direction) {
@@ -315,7 +327,7 @@ public class Puzzle {
 			temp = puzzleGrid[boxY][boxX + 1];
 			puzzleGrid[boxY][boxX + 1] = puzzleGrid[boxY + 1][boxX + 1];
 			puzzleGrid[boxY + 1][boxX + 1] = temp;
-			break ;
+			break;
 		case 4: // Flip Horizontally
 			temp = puzzleGrid[boxY][boxX];
 			puzzleGrid[boxY][boxX] = puzzleGrid[boxY][boxX + 1];
@@ -345,7 +357,7 @@ public class Puzzle {
 			}
 			break;
 		}
-		case 2:{ // Left
+		case 2: { // Left
 			if (boxX > 0) {
 				highlightedGrid[boxY][boxX] -= 4;
 				highlightedGrid[boxY + 1][boxX] -= 4;
@@ -356,7 +368,7 @@ public class Puzzle {
 			}
 			break;
 		}
-		case 3:{ // Up
+		case 3: { // Up
 			if (boxY > 0) {
 				highlightedGrid[boxY][boxX] -= 4;
 				highlightedGrid[boxY + 1][boxX] -= 4;
@@ -383,16 +395,28 @@ public class Puzzle {
 
 	public static void checkMoves() {
 		if (moves == maxMoves) {
-			// Display.setMode();
+			Robot.setTilesCleared(Robot.getTilesCleared()+tilesCleared);
+			Robot.setRedTilesCleared(Robot.getRedTilesCleared() + redCleared);
+			Robot.setBlueTilesCleared(Robot.getBlueTilesCleared() + blueCleared);
+			Robot.setGreenTilesCleared(Robot.getGreenTilesCleared()
+					+ greenCleared);
+			Robot.setYellowTilesCleared(Robot.getYellowTilesCleared()
+					+ yellowCleared);
+			Robot.setMatches(Robot.getMatches() + matchesMade);
+			if (Robot.getBestCascade() < bestCascade) {
+				Robot.setBestCascade(bestCascade);
+			}
+			Display.changeMode();
+
 		}
 	}
 
 	public static void displayGrid() {
-		
-		for(int i = 0; i < 7; i++)
-			for(int k =0; k < 10; k++)
+
+		for (int i = 0; i < 7; i++)
+			for (int k = 0; k < 10; k++)
 				highlightedGrid[i][k] = puzzleGrid[i][k];
-		//highlightedGrid = puzzleGrid;
+		// highlightedGrid = puzzleGrid;
 		if (highlightedGrid[boxY][boxX] > 4) {
 
 		} else {

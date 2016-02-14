@@ -10,8 +10,11 @@ public class Robot
 	private static int speedY = 0;
 	private static int kills = 0;
 	private static int matches = 0;
+	private static int redTilesCleared = 0;
+	private static int blueTilesCleared = 0;
+	private static int greenTilesCleared = 0;
+	private static int yellowTilesCleared = 0;
 	private static int tilesCleared = 0;
-	private static int tileTypeCleared = 0;
 	private static int shotsFired = 0;
 	private static int shotsHit = 0;
 	private static int shotsTaken = 0; //shots which hit you!
@@ -83,14 +86,6 @@ public class Robot
 
 	public static void setTilesCleared(int tilesCleared) {
 		Robot.tilesCleared = tilesCleared;
-	}
-
-	public static int getTileTypeCleared() {
-		return Robot.tileTypeCleared;
-	}
-
-	public static void setTileTypeCleared(int tileTypeCleared) {
-		Robot.tileTypeCleared = tileTypeCleared;
 	}
 
 	public static int getShotsFired() {
@@ -279,6 +274,38 @@ boolean response = true;
 
 	public static void setWidth(int width) {
 		Robot.width = width;
+	}
+
+	public static int getYellowTilesCleared() {
+		return yellowTilesCleared;
+	}
+
+	public static void setYellowTilesCleared(int yellowTilesCleared) {
+		Robot.yellowTilesCleared = yellowTilesCleared;
+	}
+
+	public static int getGreenTilesCleared() {
+		return greenTilesCleared;
+	}
+
+	public static void setGreenTilesCleared(int greenTilesCleared) {
+		Robot.greenTilesCleared = greenTilesCleared;
+	}
+
+	public static int getBlueTilesCleared() {
+		return blueTilesCleared;
+	}
+
+	public static void setBlueTilesCleared(int blueTilesCleared) {
+		Robot.blueTilesCleared = blueTilesCleared;
+	}
+
+	public static int getRedTilesCleared() {
+		return redTilesCleared;
+	}
+
+	public static void setRedTilesCleared(int redTilesCleared) {
+		Robot.redTilesCleared = redTilesCleared;
 	}
 
 }
