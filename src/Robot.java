@@ -153,6 +153,15 @@ public class Robot
 
 	public static void setSpeedX(int speedX) {
 		Robot.speedX = speedX;
+		
+		if(Robot.speedY > Robot.maxSpeed)
+		{
+			Robot.speedY = Robot.maxSpeed;
+		}
+		if(Robot.speedY < (-1)*Robot.maxSpeed)
+		{
+			Robot.speedY = (-1)*Robot.maxSpeed;
+		}
 	}
 
 	public static int getSpeedY() {
@@ -161,6 +170,10 @@ public class Robot
 
 	public static void setSpeedY(int speedY) {
 		Robot.speedY = speedY;
+		if(Robot.speedY > Robot.maxSpeed)
+		{
+			Robot.speedY = Robot.maxSpeed;
+		}
 	}
 
 }
