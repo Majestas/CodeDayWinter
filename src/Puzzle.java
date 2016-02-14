@@ -302,6 +302,8 @@ public class Puzzle {
 		maxMoves = move;
 		createGrid();
 		displayGrid();
+		boxX = 0;
+		boxY = 0;
 		Display.moveLabel.setText("Moves: "+moves+"/"+maxMoves);
 		Display.healthLabel.setText("Health: "+Robot.getHealth());
 		Display.attackLabel.setText("Attack: "+Robot.getAttack());
