@@ -302,6 +302,11 @@ public class Puzzle {
 		maxMoves = move;
 		createGrid();
 		displayGrid();
+		Display.moveLabel.setText("Moves: "+moves+"/"+maxMoves);
+		Display.healthLabel.setText("Health: "+Robot.getHealth());
+		Display.attackLabel.setText("Attack: "+Robot.getAttack());
+		Display.defenseLabel.setText("Defense: "+Robot.getDefense());
+		Display.speedLabel.setText("Speed: "+Robot.getSpeed());
 	}
 
 	public static void rotate(int direction) {
@@ -340,6 +345,7 @@ public class Puzzle {
 		}
 		displayGrid();
 		moves++;
+		Display.moveLabel.setText("Moves: "+moves+"/"+maxMoves);
 		checkMoves();
 		checkMatches();
 	}
