@@ -437,18 +437,25 @@ public class Display extends JPanel {
 
 		gamePanel.add(actionPanel, BorderLayout.CENTER);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
-		updateActionScreen();
+		//updateActionScreen();
 }
 
-	public static void updateActionScreen() {
+	public static void updateActionScreen(int[][] platformsArray) {
 
-		JLayeredPane tempPanel1 = new JLayeredPane();
+		/*JLayeredPane tempPanel1 = new JLayeredPane();
 		JLabel tempJL = createImageLabel("src/action/factory.jpg");
 		tempPanel1.add(tempJL);
 		tempPanel1.setVisible(true);
 		tempPanel1.setSize(new Dimension(500,500));
 		actionPanel.add(tempPanel1,new Integer(2));
-		//actionPanel.add(tempJL);
+		//actionPanel.add(tempJL);*/
+		
+		for (int i = 0; i < platformsArray.length; i ++){
+			for (int k = 0; k < platformsArray[i].length; k++){
+				JLabel tempLabel = createImageLabel("src/action/platform.png");
+				tempLabel.setLocation(platformsArray[i][0], platformsArray[i][0];
+			}
+		}
 	}
 
 	public static ArrayList<Integer> interpret2dArray(int[][] puzzleGrid) {
