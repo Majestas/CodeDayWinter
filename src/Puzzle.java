@@ -332,7 +332,7 @@ public class Puzzle {
 	}
 
 	public static void moveBox(int direction) {
-		System.out.println("test");
+	
 		switch (direction) {
 		case 1: {// right
 			if (boxX < 8) {

@@ -65,7 +65,7 @@ public class Display extends JPanel {
 		initStatsPanel();
 		initGamePanel();
 		initPuzzleScreen();
-		initActionScreen();
+		//initActionScreen();
 		// updatePuzzleScreen();
 		Puzzle.runPuzzle(10);
 		//changeMode();
@@ -421,8 +421,8 @@ public class Display extends JPanel {
 		actionPanel.setBackground(Color.BLACK);
 		actionPanel.setVisible(false);
 
-		gamePanel.add(actionPanel, BorderLayout.CENTER);
-		mainFrame.add(gamePanel, BorderLayout.CENTER);
+		//gamePanel.add(actionPanel, BorderLayout.CENTER);
+		//mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
 	public static void updateActionScreen(){
 		
