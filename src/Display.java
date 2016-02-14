@@ -34,6 +34,7 @@ public class Display extends JPanel {
 	private static JMenuBar menuBar;
 	private static boolean puzzleActive = true;
 	private static boolean actionActive = false;
+	private static int level = 1;
 
 	// stats panel
 	private static JPanel statsPanel;
@@ -48,13 +49,15 @@ public class Display extends JPanel {
 	private static JLabel attackLabel;
 	// game panle
 	private static JPanel gamePanel;
-	private static JPanel actionPanel;
+	//private static JPanel actionPanel;
 
 	// Puzzle class
 	private static JPanel puzzlePanel;
 	private static JPanel puzzleBackgroundPanel;
 
 	// actionPanel
+	private static JPanel actionPanel;
+	private static JPanel actionBackgroundPanel;
 
 	public static void initDisplay() throws IOException {
 		initMainFrame();
@@ -62,8 +65,10 @@ public class Display extends JPanel {
 		initStatsPanel();
 		initGamePanel();
 		initPuzzleScreen();
+		initActionScreen();
 		// updatePuzzleScreen();
 		Puzzle.runPuzzle(10);
+		//changeMode();
 	}
 
 	private static void initMainFrame() {
@@ -130,7 +135,7 @@ public class Display extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Puzzle.createGrid();
+				changeMode();
 			}
 
 		});
@@ -230,23 +235,6 @@ public class Display extends JPanel {
 		gamePanel.setPreferredSize(new Dimension(1000, 720));
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 
-	}
-
-	public static void updateGameScreen() {
-
-	}
-
-	public static void hideGameScreen() {
-
-	}
-
-	public static void initPuzzleScreen() {
-		puzzlePanel = new JPanel();
-		puzzlePanel.setPreferredSize(new Dimension(1000, 720));
-		puzzlePanel.setBackground(Color.BLACK);
-
-		gamePanel.add(puzzlePanel, BorderLayout.CENTER);
-
 		KeyListener keyListeners = new KeyListener() {
 			public void keyPressed(KeyEvent e) {
 
@@ -317,8 +305,23 @@ public class Display extends JPanel {
 			}
 		};
 		mainFrame.addKeyListener(keyListeners);
+	}
 
-		mainFrame.add(gamePanel, BorderLayout.CENTER);
+	public static void updateGameScreen() {
+
+	}
+
+	public static void hideGameScreen() {
+
+	}
+
+	public static void initPuzzleScreen() {
+		puzzlePanel = new JPanel();
+		puzzlePanel.setPreferredSize(new Dimension(1000, 720));
+		puzzlePanel.setBackground(Color.BLACK);
+
+		//gamePanel.add(puzzlePanel, BorderLayout.CENTER);
+		//mainFrame.add(gamePanel, BorderLayout.CENTER);
 	}
 
 	public static void updatePuzzleScreen(int[][] puzzleGrid) {
@@ -411,7 +414,22 @@ public class Display extends JPanel {
 	public static void hidePuzzelScreen() {
 
 	}
+	
+	public static void initActionScreen(){
+		actionPanel = new JPanel();
+		actionPanel.setPreferredSize(new Dimension(1000, 720));
+		actionPanel.setBackground(Color.BLACK);
+		actionPanel.setVisible(false);
 
+		gamePanel.add(actionPanel, BorderLayout.CENTER);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
+	}
+	public static void updateActionScreen(){
+		
+	}
+
+	
+	
 	public static ArrayList<Integer> interpret2dArray(int[][] puzzleGrid) {
 		ArrayList<Integer> tempArray = new ArrayList<Integer>();
 
@@ -440,14 +458,24 @@ public class Display extends JPanel {
 	}
 
 	public static void changeMode() {
+		level += 1;
+		levelLabel.setText("Level: "+ level);
 		if (actionActive) {
 			actionActive = false;
 			puzzleActive = true;
+			actionPanel.setVisible(false);
+			actionPanel.removeAll();
+			Puzzle.runPuzzle(10);
+			gamePanel.revalidate();
+
 		}
-		else
+		else if (puzzleActive)
 		{
 			actionActive = true;
 			puzzleActive = false;
+			puzzlePanel.setVisible(false);
+			//puzzlePanel.removeAll();
+			gamePanel.revalidate();
 		}
 		
 	}
