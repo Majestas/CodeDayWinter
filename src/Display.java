@@ -508,13 +508,13 @@ public class Display extends JPanel {
 			puzzlePanel.setVisible(false);
 			puzzlePanel.removeAll();
 			gamePanel.revalidate();
-<<<<<<< HEAD
+
 			
 			actionPanel.setVisible(true);
 			
-=======
+
 			moveLabel.setVisible(false);
->>>>>>> origin/master
+
 		}
 
 	}
