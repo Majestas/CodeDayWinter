@@ -33,6 +33,219 @@ public class Puzzle {
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
 		for (int i = 0; i < 7; i++) {
+				if ((puzzleGrid[i][0] == puzzleGrid[i][1])
+						&& (puzzleGrid[i][0] == puzzleGrid[i][2])
+						&& (puzzleGrid[i][0] == puzzleGrid[i][3])
+						&& (puzzleGrid[i][0] == puzzleGrid[i][4])
+						&& (puzzleGrid[i][0] == puzzleGrid[i][5])
+						&& (puzzleGrid[i][0] == puzzleGrid[i][6])
+						&& (puzzleGrid[i][0] == puzzleGrid[i][7])
+						&& (puzzleGrid[i][0] == puzzleGrid[i][8])
+						&& (puzzleGrid[i][0] == puzzleGrid[i][9])) {
+					switch (puzzleGrid[i][0]) {
+					case 1:
+						redCleared += 10;
+						Robot.setHealth(Robot.getHealth() + 10);
+						break;
+					case 2:
+						greenCleared += 10;
+						Robot.setDefense(Robot.getDefense() + 10);
+						break;
+					case 3:
+						yellowCleared += 10;
+						Robot.setAttack(Robot.getAttack() + 10);
+						break;
+					case 4:
+						blueCleared += 10;
+						Robot.setSpeed(Robot.getSpeed() + 10);
+						break;
+					default:
+						break;
+					}
+					match[i][0] = 1;
+					match[i][1] = 1;
+					match[i][2] = 1;
+					match[i][3] = 1;
+					match[i][4] = 1;
+					match[i][5] = 1;
+					match[i][6] = 1;
+					match[i][7] = 1;
+					match[i][8] = 1;
+					match[i][9] = 1;
+					matchesMade++;
+					cascade++;
+					deletedTiles = true;
+				}
+		}
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 2; j++) {
+				if ((puzzleGrid[i][j] == puzzleGrid[i][j + 1])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 2])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 3])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 4])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 5])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 6])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 7])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 8])) {
+					switch (puzzleGrid[i][j]) {
+					case 1:
+						redCleared += 9;
+						Robot.setHealth(Robot.getHealth() + 9);
+						break;
+					case 2:
+						greenCleared += 9;
+						Robot.setDefense(Robot.getDefense() + 9);
+						break;
+					case 3:
+						yellowCleared += 9;
+						Robot.setAttack(Robot.getAttack() + 9);
+						break;
+					case 4:
+						blueCleared += 9;
+						Robot.setSpeed(Robot.getSpeed() + 9);
+						break;
+					default:
+						break;
+					}
+					match[i][j] = 1;
+					match[i][j + 1] = 1;
+					match[i][j + 2] = 1;
+					match[i][j + 3] = 1;
+					match[i][j + 4] = 1;
+					match[i][j + 5] = 1;
+					match[i][j + 6] = 1;
+					match[i][j + 7] = 1;
+					match[i][j + 8] = 1;
+					matchesMade++;
+					cascade++;
+					deletedTiles = true;
+				}
+			}
+		}
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 3; j++) {
+				if ((puzzleGrid[i][j] == puzzleGrid[i][j + 1])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 2])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 3])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 4])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 5])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 6])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 7])) {
+					switch (puzzleGrid[i][j]) {
+					case 1:
+						redCleared += 8;
+						Robot.setHealth(Robot.getHealth() + 8);
+						break;
+					case 2:
+						greenCleared += 8;
+						Robot.setDefense(Robot.getDefense() + 8);
+						break;
+					case 3:
+						yellowCleared += 8;
+						Robot.setAttack(Robot.getAttack() + 8);
+						break;
+					case 4:
+						blueCleared += 8;
+						Robot.setSpeed(Robot.getSpeed() + 8);
+						break;
+					default:
+						break;
+					}
+					match[i][j] = 1;
+					match[i][j + 1] = 1;
+					match[i][j + 2] = 1;
+					match[i][j + 3] = 1;
+					match[i][j + 4] = 1;
+					match[i][j + 5] = 1;
+					match[i][j + 6] = 1;
+					match[i][j + 7] = 1;
+					matchesMade++;
+					cascade++;
+					deletedTiles = true;
+				}
+			}
+		}
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 4; j++) {
+				if ((puzzleGrid[i][j] == puzzleGrid[i][j + 1])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 2])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 3])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 4])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 5])
+						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 6])) {
+					switch (puzzleGrid[i][j]) {
+					case 1:
+						redCleared += 7;
+						Robot.setHealth(Robot.getHealth() + 7);
+						break;
+					case 2:
+						greenCleared += 7;
+						Robot.setDefense(Robot.getDefense() + 7);
+						break;
+					case 3:
+						yellowCleared += 7;
+						Robot.setAttack(Robot.getAttack() + 7);
+						break;
+					case 4:
+						blueCleared += 7;
+						Robot.setSpeed(Robot.getSpeed() + 7);
+						break;
+					default:
+						break;
+					}
+					match[i][j] = 1;
+					match[i][j + 1] = 1;
+					match[i][j + 2] = 1;
+					match[i][j + 3] = 1;
+					match[i][j + 4] = 1;
+					match[i][j + 5] = 1;
+					match[i][j + 6] = 1;
+					matchesMade++;
+					cascade++;
+					deletedTiles = true;
+				}
+			}
+		}
+			for (int j = 0; j < 10; j++) {
+				if ((puzzleGrid[0][j] == puzzleGrid[1][j])
+						&& (puzzleGrid[0][j] == puzzleGrid[2][j])
+						&& (puzzleGrid[0][j] == puzzleGrid[3][j])
+						&& (puzzleGrid[0][j] == puzzleGrid[4][j])
+						&& (puzzleGrid[0][j] == puzzleGrid[5][j])
+						&& (puzzleGrid[0][j] == puzzleGrid[6][j])) {
+					switch (puzzleGrid[0][j]) {
+					case 1:
+						redCleared += 7;
+						Robot.setHealth(Robot.getHealth() + 7);
+						break;
+					case 2:
+						greenCleared += 7;
+						Robot.setDefense(Robot.getDefense() + 7);
+						break;
+					case 3:
+						yellowCleared += 7;
+						Robot.setAttack(Robot.getAttack() + 7);
+						break;
+					case 4:
+						blueCleared += 7;
+						Robot.setSpeed(Robot.getSpeed() + 7);
+						break;
+					default:
+						break;
+					}
+					match[0][j] = 1;
+					match[1][j] = 1;
+					match[2][j] = 1;
+					match[3][j] = 1;
+					match[4][j] = 1;
+					match[5][j] = 1;
+					match[6][j] = 1;
+					matchesMade++;
+					cascade++;
+					deletedTiles = true;
+				}
+			}
+		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 5; j++) {
 				if ((puzzleGrid[i][j] == puzzleGrid[i][j + 1])
 						&& (puzzleGrid[i][j] == puzzleGrid[i][j + 2])
@@ -302,6 +515,8 @@ public class Puzzle {
 		maxMoves = move;
 		createGrid();
 		displayGrid();
+		boxX = 0;
+		boxY = 0;
 		Display.moveLabel.setText("Moves: "+moves+"/"+maxMoves);
 		Display.healthLabel.setText("Health: "+Robot.getHealth());
 		Display.attackLabel.setText("Attack: "+Robot.getAttack());
@@ -346,8 +561,8 @@ public class Puzzle {
 		displayGrid();
 		moves++;
 		Display.moveLabel.setText("Moves: "+moves+"/"+maxMoves);
-		checkMoves();
 		checkMatches();
+		checkMoves();
 	}
 
 	public static void moveBox(int direction) {

@@ -70,7 +70,7 @@ public class Display extends JPanel {
 		initPuzzleScreen();
 		initActionScreen();
 		// updatePuzzleScreen();
-		Puzzle.runPuzzle(10);
+		Puzzle.runPuzzle(5+(level*5));
 		// changeMode();
 	}
 
@@ -236,12 +236,12 @@ public class Display extends JPanel {
 		c.gridx = 1;
 		c.gridy = 6;
 		statsPanel.add(moveLabel, c);
-
+		if(puzzleActive) {
 		JLabel moveImageLabel = createImageLabel("src/stats/moves.png", statsImageSize, statsImageSize);
 		c.gridx = 0;
 		c.gridy = 6;
 		statsPanel.add(moveImageLabel, c);
-		//
+		}
 
 	}
 
@@ -495,10 +495,9 @@ public class Display extends JPanel {
 			puzzleActive = true;
 			actionPanel.setVisible(false);
 			actionPanel.removeAll();
-
+			moveLabel.setVisible(true);
 			puzzlePanel.setVisible(true);
-
-			Puzzle.runPuzzle(10);
+			Puzzle.runPuzzle(5+(5*level));
 			// gamePanel.revalidate();
 			// initPuzzleScreen();
 			gamePanel.revalidate();
@@ -509,9 +508,13 @@ public class Display extends JPanel {
 			puzzlePanel.setVisible(false);
 			puzzlePanel.removeAll();
 			gamePanel.revalidate();
+<<<<<<< HEAD
 			
 			actionPanel.setVisible(true);
 			
+=======
+			moveLabel.setVisible(false);
+>>>>>>> origin/master
 		}
 
 	}
