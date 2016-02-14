@@ -284,7 +284,7 @@ public class Puzzle {
 		for (int i = 0; i < 7; i++) {
 			for (int k = 0; k < 10; k++) {
 				if (puzzleGrid[i][k] == 0) {
-					puzzleGrid[i][k] = (int) (Math.random() * 4) + 2;
+					puzzleGrid[i][k] = (int) (Math.random() * 4) + 1;
 				}
 			}
 		}
@@ -314,6 +314,7 @@ public class Puzzle {
 			puzzleGrid[boxY][boxX + 1] = puzzleGrid[boxY + 1][boxX + 1];
 			puzzleGrid[boxY + 1][boxX + 1] = puzzleGrid[boxY + 1][boxX];
 			puzzleGrid[boxY + 1][boxX] = temp;
+			break;
 		case 3: // Flip Vertically
 			temp = puzzleGrid[boxY][boxX];
 			puzzleGrid[boxY][boxX] = puzzleGrid[boxY + 1][boxX];
@@ -321,6 +322,7 @@ public class Puzzle {
 			temp = puzzleGrid[boxY][boxX + 1];
 			puzzleGrid[boxY][boxX + 1] = puzzleGrid[boxY + 1][boxX + 1];
 			puzzleGrid[boxY + 1][boxX + 1] = temp;
+			break ;
 		case 4: // Flip Horizontally
 			temp = puzzleGrid[boxY][boxX];
 			puzzleGrid[boxY][boxX] = puzzleGrid[boxY][boxX + 1];
@@ -328,6 +330,7 @@ public class Puzzle {
 			temp = puzzleGrid[boxY + 1][boxX];
 			puzzleGrid[boxY + 1][boxX] = puzzleGrid[boxY + 1][boxX + 1];
 			puzzleGrid[boxY + 1][boxX + 1] = temp;
+			break;
 		}
 		displayGrid();
 		moves++;
@@ -395,7 +398,10 @@ public class Puzzle {
 	public static void displayGrid() {
 		
 		System.out.println("updating grid");
-		highlightedGrid = puzzleGrid;
+		for(int i = 0; i < 7; i++)
+			for(int k =0; k < 10; k++)
+				highlightedGrid[i][k] = puzzleGrid[i][k];
+		//highlightedGrid = puzzleGrid;
 		if (highlightedGrid[boxY][boxX] > 4) {
 
 		} else {

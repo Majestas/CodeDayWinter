@@ -202,9 +202,25 @@ public class Robot
 		
 		for(int[] plat : plats)
 		{
-			if(ximage > plat[0] && ximage < plat[0] + plat[3])
+			if(ximage > plat[0] && ximage < plat[0] + plat[2])
 			{
-				
+				response = false;
+				break;
+			}
+			if(ximage > plat[0] && ximage + Robot.width < plat[0] + plat[2])
+			{
+				response = false;
+				break;
+			}
+			if(yimage > plat[1] && yimage < plat[1] + plat[3])
+			{
+				response = false;
+				break;
+			}
+			if(ximage > plat[1] && ximage + Robot.height < plat[1] + plat[3])
+			{
+				response = false;
+				break;
 			}
 		}
 		
@@ -214,7 +230,39 @@ public class Robot
 	
 	public static boolean collideY()
 	{
-		return true;
+boolean response = true;
+		
+		int ximage = Robot.x + 0;
+		int yimage = Robot.y + Robot.speedY;
+		
+		int[][] plats = {{0,0,0,0},{1,1,1,1}}; //filler for actual platform stuff {x,y,l,h}
+		
+		for(int[] plat : plats)
+		{
+			if(ximage > plat[0] && ximage < plat[0] + plat[2])
+			{
+				response = false;
+				break;
+			}
+			if(ximage > plat[0] && ximage + Robot.width < plat[0] + plat[2])
+			{
+				response = false;
+				break;
+			}
+			if(yimage > plat[1] && yimage < plat[1] + plat[3])
+			{
+				response = false;
+				break;
+			}
+			if(ximage > plat[1] && ximage + Robot.height < plat[1] + plat[3])
+			{
+				response = false;
+				break;
+			}
+		}
+		
+		
+		return response;
 	}
 
 	public static int getHeight() {
