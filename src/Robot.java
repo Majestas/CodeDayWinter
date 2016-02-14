@@ -24,7 +24,7 @@ public class Robot
 	private static int y = 0;
 	private static int height = 22;
 	private static int width = 15;
-	private static int[][] plats = Database.getPlatforms();
+	private static int[][] plats = {{0,400, 1000, 50}}; //fake platform in center of screen
 	
 	
 	public Robot(int startx, int starty)
@@ -257,6 +257,19 @@ public class Robot
 		
 		
 		return response;
+	}
+	
+	public static void tick() //gravity
+	{
+		boolean ground = Robot.onGround();
+		
+		if(Robot.speedX > 0 && ground)
+			Robot.speedX -= 1;
+		else if(Robot.speedX < 0 && ground)
+			Robot.speedX += 1;
+		
+		if(Robot.speedY != 0 && !ground)
+			Robot.speedY += 1;
 	}
 
 	public static int getHealth() {
