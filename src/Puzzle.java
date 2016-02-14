@@ -57,7 +57,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 10;
-						Robot.setSpeed(Robot.getSpeed() + 10);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 10);
 						break;
 					default:
 						break;
@@ -102,7 +102,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 9;
-						Robot.setSpeed(Robot.getSpeed() + 9);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 9);
 						break;
 					default:
 						break;
@@ -146,7 +146,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 8;
-						Robot.setSpeed(Robot.getSpeed() + 8);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 8);
 						break;
 					default:
 						break;
@@ -188,7 +188,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 7;
-						Robot.setSpeed(Robot.getSpeed() + 7);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 7);
 						break;
 					default:
 						break;
@@ -228,7 +228,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 7;
-						Robot.setSpeed(Robot.getSpeed() + 7);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 7);
 						break;
 					default:
 						break;
@@ -267,7 +267,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 6;
-						Robot.setSpeed(Robot.getSpeed() + 6);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 6);
 						break;
 					default:
 						break;
@@ -306,7 +306,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 6;
-						Robot.setSpeed(Robot.getSpeed() + 6);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 6);
 						break;
 					default:
 						break;
@@ -344,7 +344,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 5;
-						Robot.setSpeed(Robot.getSpeed() + 5);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 5);
 						break;
 					default:
 						break;
@@ -381,7 +381,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 5;
-						Robot.setSpeed(Robot.getSpeed() + 5);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 5);
 						break;
 					default:
 						break;
@@ -417,7 +417,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 4;
-						Robot.setSpeed(Robot.getSpeed() + 4);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 4);
 						break;
 					default:
 						break;
@@ -452,7 +452,7 @@ public class Puzzle {
 						break;
 					case 4:
 						blueCleared += 4;
-						Robot.setSpeed(Robot.getSpeed() + 4);
+						Robot.setMaxSpeed(Robot.getMaxSpeed() + 4);
 						break;
 					default:
 						break;
@@ -483,7 +483,7 @@ public class Puzzle {
 			Display.healthLabel.setText("Health: "+Robot.getHealth());
 			Display.attackLabel.setText("Attack: "+Robot.getAttack());
 			Display.defenseLabel.setText("Defense: "+Robot.getDefense());
-			Display.speedLabel.setText("Speed: "+Robot.getSpeed());
+			Display.speedLabel.setText("Speed: "+Robot.getMaxSpeed());
 			displayGrid();
 			dropTiles();
 		}
@@ -521,7 +521,7 @@ public class Puzzle {
 		Display.healthLabel.setText("Health: "+Robot.getHealth());
 		Display.attackLabel.setText("Attack: "+Robot.getAttack());
 		Display.defenseLabel.setText("Defense: "+Robot.getDefense());
-		Display.speedLabel.setText("Speed: "+Robot.getSpeed());
+		Display.speedLabel.setText("Speed: "+Robot.getMaxSpeed());
 	}
 
 	public static void rotate(int direction) {

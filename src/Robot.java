@@ -33,7 +33,14 @@ public class Robot
 		Robot.setY(startx);
 	}
 	
-
+	public static int getMaxSpeed() {
+		return Robot.maxSpeed;
+	}
+	
+	public static void setMaxSpeed(int maxSpeed) {
+		Robot.maxSpeed = maxSpeed;
+	}
+	
 	public static int getX() {
 		return Robot.x;
 	}
