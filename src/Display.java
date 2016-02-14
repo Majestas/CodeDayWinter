@@ -168,6 +168,7 @@ public class Display extends JPanel {
 				displayStats();
 			}
 		});
+		StatsMenu.add(statsOption);
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.setVisible(true);
 	}
@@ -574,6 +575,7 @@ public class Display extends JPanel {
 			Puzzle.runPuzzle(5+(5*level));
 			// gamePanel.revalidate();
 			// initPuzzleScreen();
+			gamePanel.add(dataPanel);
 			gamePanel.revalidate();
 
 		} else if (puzzleActive) {
@@ -605,8 +607,8 @@ public class Display extends JPanel {
 		puzzlePanel.removeAll();
 		moveLabel.setVisible(false);
 		moveImageLabel.setVisible(false);
-		dataPanel.setVisible(true);
 		dataPanel = new JPanel(new GridBagLayout());
+		dataPanel.setVisible(true);
 		dataPanel.setPreferredSize(new Dimension(1000, 720));
 		dataPanel.setBackground(Color.RED);
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
@@ -618,12 +620,14 @@ public class Display extends JPanel {
 		c.ipady = 50;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		int fontsize = 24;
-		
 	    JLabel healthStatLabel = new JLabel("Health: "+Robot.getHealth());
 		healthStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
 		c.gridx = 0;
 		c.gridy = 1;
 		dataPanel.add(healthStatLabel, c);
+		
+		gamePanel.add(dataPanel, BorderLayout.CENTER);
+		dataPanel.revalidate();
 		
 		JLabel attackStatLabel = new JLabel("Attack: "+Robot.getAttack());
 		attackStatLabel.setFont(new Font("futura", Font.PLAIN, fontsize));
@@ -709,6 +713,7 @@ public class Display extends JPanel {
 		c.gridy = 15;
 		dataPanel.add(shotsTakenLabel, c);
 		
+		dataPanel.revalidate();
 		gamePanel.revalidate();
 	}
 	
