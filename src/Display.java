@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -179,6 +180,13 @@ public class Display extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					Database.setHealth(Robot.getHealth());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 
 		});
@@ -235,10 +243,7 @@ public class Display extends JPanel {
 			}
 		});
 		StatsMenu.add(statsOption);
-<<<<<<< HEAD
-		
-=======
->>>>>>> origin/master
+
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.setVisible(true);
 	}

@@ -11,7 +11,7 @@ public class Database {
 
 	static String[][] players;
 	static String player;
-	static int playerID = 1;
+	static int playerID;
 	static int level;
 	static int health;
 	static int attack;
@@ -321,8 +321,9 @@ public class Database {
 		return health;
 	}
 
-	public static void setHealth(int health) {
+	public static void setHealth(int health) throws SQLException {
 		Database.health = health;
+		writeStats();
 	}
 	
 	public static void readStats() throws SQLException
